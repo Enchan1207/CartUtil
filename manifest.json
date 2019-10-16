@@ -1,15 +1,16 @@
 {
     "manifest_version": 2,
     "name": "秋月カートユーティリティ",
-    "version": "0.1",
-    "description": "閲覧した商品をリストアップし、まとめてカートに入れます。",
+    "version": "0.2",
+    "description": "カートの内容をインポート/エクスポートします。",
     "icons": {
         "48": "icon48.png"
     },
     "content_scripts": [
         {
             "matches": [
-                "http://akizukidenshi.com/*"
+                "http://akizukidenshi.com/catalog/cart/cart.aspx",
+                "http://akizukidenshi.com/catalog/quickorder/blanketorder.aspx"
             ],
             "js": [
                 "main.js"
