@@ -1,0 +1,19 @@
+{
+    "manifest_version": 2,
+    "name": "秋月カートユーティリティ",
+    "version": "0.1",
+    "description": "閲覧した商品をリストアップし、まとめてカートに入れます。",
+    "icons": {
+        "48": "icon48.png"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "http://akizukidenshi.com/*"
+            ],
+            "js": [
+                "main.js"
+            ]
+        }
+    ]
+}
