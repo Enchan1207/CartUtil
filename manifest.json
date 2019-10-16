@@ -9,8 +9,7 @@
     "content_scripts": [
         {
             "matches": [
-                "http://akizukidenshi.com/catalog/cart/cart.aspx",
-                "http://akizukidenshi.com/catalog/quickorder/blanketorder.aspx"
+                "http://akizukidenshi.com/catalog/cart/cart.aspx*"
             ],
             "js": [
                 "main.js"
