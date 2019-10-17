@@ -1,18 +1,22 @@
 {
     "manifest_version": 2,
-    "name": "秋月カートユーティリティ",
-    "version": "0.2",
-    "description": "カートの内容をインポート/エクスポートします。",
+    "name": "秋月ウィッシュリスト",
+    "version": "0.2.1",
+    "description": "ウィッシュリストを作成、表示します。",
+    "permissions": ["tabs"],
     "icons": {
         "48": "icon48.png"
+    },
+    "browser_action": {
+        "default_popup": "popup.html"
     },
     "content_scripts": [
         {
             "matches": [
-                "http://akizukidenshi.com/catalog/cart/cart.aspx*"
+                "http://akizukidenshi.com/*"
             ],
             "js": [
-                "main.js"
+                "cScript.js"
             ]
         }
     ]
