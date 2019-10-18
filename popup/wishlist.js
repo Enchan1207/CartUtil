@@ -57,7 +57,10 @@ function addItem(code, desc, price, count) {
     count = Number(count.replace(/[^0-9]/ig, ""));
     let vldcount = isNaN(count);
     desc = desc.replace(/(\{|\}|\,|\:|\"|\')/, " ");
-    if(vldCode == false || vldcount == true) return 1;
+    price = Number(price.replace(/[^0-9]/ig, ""));
+    let vldprice = isNaN(price);
+
+    if(vldCode == false || vldcount == true || vldprice == true || count == 0 || price == 0) return 1;
 
     //--追加
     let newItem = {
@@ -93,10 +96,7 @@ function removeItem(index) {
 //--アイテムを通販コードから検索
 function searchItem(code_) {
     let fltList = wishlist.wishlist[wlindex].products.filter(product => product.code == code_);
-    if(fltList.length == 0){
-        return false;
-    }
-    return true;
+    return fltList.length;
 }
 
 //--ウィッシュリストを追加/削除(ただしウィッシュリストが一つの時は削除できない))

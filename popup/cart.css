@@ -1,0 +1,24 @@
+/*
+ * カート用css
+*/
+
+#list tr{
+    height: 25px;
+}
+#list .icon{
+    width:50px;
+}
+#list .icon img{
+    width:50px;
+}
+#list .code{
+    font-weight: bold;
+}
+#list .price{
+    width: 90px;
+    text-align: right;
+}
+#list .count{
+    width: 90px;
+    text-align: right;
+}

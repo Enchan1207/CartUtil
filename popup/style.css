@@ -3,7 +3,8 @@
 */
 
 #wrapper{
-    width: 200px;
+    width: 400px;
+    height: 580px;
 }
 
 h2{
@@ -13,13 +14,24 @@ h2{
 input{
     width: 100%;
 }
-td{
-    max-width: 140px;
-}
 td#label{
-    min-width: 50px;
+    min-width: 200px;
 }
 
 #info{
+    font-weight: bold;
     color: #a00;
+}
+
+div#listLabel{
+    height:40px;
+}
+div#cart{
+    height:400px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+div#add{
+    margin:5px 10px;
+    height:100px;
 }
