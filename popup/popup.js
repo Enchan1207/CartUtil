@@ -9,11 +9,9 @@ chrome.tabs.query({active:true}, function(tab) {
         let url = response.url;
 
         if(/akizukidenshi.com\/catalog\/g\/*/.test(url)){
-            document.body.innerHTML = "商品ページです";
+            loadWishList();
         }else if(/akizukidenshi.com\/catalog\/cart\/*/.test(url)){
-            document.body.innerHTML = "カートの中身です";
-        }else{
-            document.body.innerHTML = "どちらでもないページです";
+
         }
     });
 });
