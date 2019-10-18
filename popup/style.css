@@ -1,0 +1,25 @@
+/*
+ * ポップアップ用css
+*/
+
+#wrapper{
+    width: 200px;
+}
+
+h2{
+    margin: 5px 0px;
+}
+
+input{
+    width: 100%;
+}
+td{
+    max-width: 140px;
+}
+td#label{
+    min-width: 50px;
+}
+
+#info{
+    color: #a00;
+}

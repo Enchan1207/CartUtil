@@ -52,16 +52,51 @@ function saveWishList() {
 
 //--ウィッシュリストにアイテムを追加/指定インデックスのアイテムを削除
 function addItem(code, desc, price, count) {
+    //--一応バリデーション
+    let vldCode = /^[MKPBRSICT]\-\d*$/.test(code);
+    count = Number(count.replace(/[^0-9]/ig, ""));
+    let vldcount = isNaN(count);
+    desc = desc.replace(/(\{|\}|\,|\:|\"|\')/, " ");
+    if(vldCode == false || vldcount == true) return 1;
+
+    //--追加
     let newItem = {
         "code" : code,
         "desc" : desc,
         "price" : price,
         "count" : count
     };
-    wishlist.wishlist[wlindex].products.push(newItem);
+
+    //--既に存在すれば更新、なければ追加
+    let index = -1;
+    wishlist.wishlist[wlindex].products.filter(function(product,index_,array){
+        if(product.code == code){
+            index = index_;
+            return true;
+        }else{
+            return false;
+        }
+    });
+
+    if(index != -1){
+        wishlist.wishlist[wlindex].products[index] = newItem;
+    }else{
+        wishlist.wishlist[wlindex].products.push(newItem);
+    }
+
+    return 0;
 }
 function removeItem(index) {
     wishlist.wishlist[wlindex].products.splice(index, 1);
+}
+
+//--アイテムを通販コードから検索
+function searchItem(code_) {
+    let fltList = wishlist.wishlist[wlindex].products.filter(product => product.code == code_);
+    if(fltList.length == 0){
+        return false;
+    }
+    return true;
 }
 
 //--ウィッシュリストを追加/削除(ただしウィッシュリストが一つの時は削除できない))

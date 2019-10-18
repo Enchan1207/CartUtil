@@ -6,9 +6,10 @@
 <html lang="ja">
     <head>
         <meta charset="UTF-8">
+        <link rel="stylesheet" href="style.css">
+
         <script src="wishlist.js"></script>
         <script src="popup.js"></script>
-        <link rel="stylesheet" href="style.css">
     </head>
 
     <body>
@@ -24,6 +25,36 @@
                 追加、削除はlsの操作でできるので論外として、
                 ウィッシュリストのデータをどう保持するか
             -->
+
+            <!-- ウィッシュリストにアイテムを追加 -->
+            <div id="add">
+                <h2>ウィッシュリストに追加</h2>
+                <form id="add">
+                    <input type="hidden" name="desc">
+                    <input type="hidden" name="price">
+                    <table>
+                        <tr>
+                            <td colspan="2">
+                                <div id="info">　</div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td id="label">コード</td>
+                            <td><input type="text" name="code" disabled></td>
+                        </tr>
+
+                        <tr>
+                            <td id="label">数量</td>
+                            <td><input type="text" name="count"></td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="2"><input type="submit" value="追加"></td>
+                        </tr>
+                    </table>                    
+                </form>
+            </div>
 
             
 
