@@ -22,3 +22,22 @@
     width: 90px;
     text-align: right;
 }
+#list .delete {
+    width:50px;
+    padding: 0;
+}
+#list .delete input{
+    width: 50px;
+    margin: 0;
+}
+
+#sumcount{
+    font-weight: bold;
+    font-size: 120%;
+    text-align: right;
+}
+#sumprice{
+    font-weight: bold;
+    font-size: 120%;
+    text-align: right;
+}
