@@ -50,7 +50,7 @@ function saveWishList() {
     localStorage.setItem("wlindex", wlindex);
 }
 
-//--ウィッシュリストにアイテムを追加/指定インデックスのアイテムを削除
+//--ウィッシュリストにアイテムを追加/指定インデックス/コードのアイテムを削除
 function addItem(code, desc, price, count) {
     //--一応バリデーション
     let vldCode = /^[MKPBRSICT]\-\d*$/.test(code);
@@ -91,6 +91,9 @@ function addItem(code, desc, price, count) {
 }
 function removeItem(index) {
     wishlist.wishlist[wlindex].products.splice(index, 1);
+}
+function removeItemByCode(code){
+    wishlist.wishlist[wlindex].products = wishlist.wishlist[wlindex].products.filter(elem => elem.code != code);
 }
 
 //--アイテムを通販コードから検索

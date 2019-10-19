@@ -85,6 +85,23 @@ chrome.tabs.query({active:true}, function(tab) {
                     count_td.innerHTML = item.count + "個";
                     base2.appendChild(count_td);
 
+                    //--削除ボタン
+                    let del_td = document.createElement("td");
+                    let del_btn = document.createElement("input");
+                    del_td.rowSpan = 2;
+                    del_td.setAttribute("class", "delete");
+                    del_btn.type = "button";
+                    del_btn.value = "削除";
+                    del_btn.addEventListener("click", function(){
+                        //--クリックしたらウィッシュリストから自分を消す
+                        removeItem(item.code);
+                        saveWishList();
+                        location.reload();
+                    });
+                    del_td.appendChild(del_btn);
+                    base1.appendChild(del_td);
+                    
+
                     cartList.appendChild(base1);
                     cartList.appendChild(base2);
 
