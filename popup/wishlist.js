@@ -101,6 +101,10 @@ function searchItem(code_) {
     let fltList = wishlist.wishlist[wlindex].products.filter(product => product.code == code_);
     return fltList.length;
 }
+function getItemByCode(code_){
+    let fltList = wishlist.wishlist[wlindex].products.filter(product => product.code == code_);
+    return fltList[0];
+}
 
 //--ウィッシュリストを追加/削除(ただしウィッシュリストが一つの時は削除できない))
 function createWishList(name) {

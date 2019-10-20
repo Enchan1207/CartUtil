@@ -1,0 +1,42 @@
+<!--
+ - ポップアップ
+-->
+
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="cart.css">
+
+        <script src="wishlist.js"></script>
+        <script src="script.js"></script>
+    </head>
+
+    <body>
+        <!-- フレーム -->
+        <div id="wrapper">
+            <!-- ウィッシュリストラベル -->
+            <div id="listLabel">
+                <span>ウィッシュリスト</span>
+                <span>
+                    <input type="text" autocomplete="on" list="labels" id="labelinput">
+                </span>
+                <!-- ここにリスト名が並ぶ -->
+                <datalist id="labels"></datalist>
+            </div>
+
+            <!-- ウィッシュリスト本体 -->
+            <div id="listItem">
+                <!-- ここにアイテムが追加される -->
+                <table id="list"></table>
+            </div>
+
+            <!-- リスト操作パネル -->
+            <div id="listPanel">
+                <!-- ここに「追加」だったり「エクスポート」だったりが並ぶ -->
+                <table id="panel"></table>
+            </div>
+        </div>
+    </body>
+</html>

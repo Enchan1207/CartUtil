@@ -13,6 +13,7 @@
 }
 #list .code{
     font-weight: bold;
+    text-align: left;
 }
 #list .price{
     width: 90px;
