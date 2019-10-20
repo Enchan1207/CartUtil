@@ -4,12 +4,17 @@
 
 //--ページ情報を取得
 chrome.tabs.query({active:true}, function(tab) {
-    chrome.tabs.sendMessage(tab[0].id, {text:''}, function(response) {
+    chrome.tabs.sendMessage(tab[0].id, {command: "none"}, function(response) {
         loadWishList();
 
         //--タイプ別処理
         switch (response.type) {
             case "product":
+                //--インポート/エクスポートボタンを非表示に
+                let io_div = document.querySelector("#cartIO");
+                io_div.setAttribute("style", "display:none");
+
+
                 //--既に現在選択中のリストに登録されているか検索
                 let vldCode = /^[MKPBRSICT]\-\d*$/.test(response.code);
                 if(vldCode && (searchItem(response.code) != 0)){
@@ -127,7 +132,21 @@ chrome.tabs.query({active:true}, function(tab) {
                 break;
 
             default:
-                console.log("process is undefined.");
+                //--アイテム追加ボタンを非表示に
+                let add_div = document.querySelector("#add");
+                add_div.setAttribute("style", "display:none");
+                
+                //--エクスポートボタンクリック時の処理
+                let ex_btn = document.querySelector("#export");
+                ex_btn.addEventListener("click", function(){
+                    //--タブにメッセージを送信
+                    let command = {
+                        command: "export",
+                    };
+                    chrome.tabs.sendMessage(tab[0].id, command, function(response) {
+                        console.log("返ってこーい");
+                    });
+                });
                 break;
         }
     });
