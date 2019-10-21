@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "秋月ウィッシュリスト",
-    "version": "1.0",
+    "version": "2.0",
     "description": "ウィッシュリストを作成、表示します。",
     "permissions": ["tabs"],
     "icons": {

@@ -30,7 +30,7 @@ function getIteminfo() {
 }
 
 //--カートの一覧を取得する
-function getCartItems() {
+function _getCartItems() {
     //--カートリストから、通販コードのtdがあるtrのみ取り出す
     let cartElems_ = document.querySelectorAll("table.cart_table tr");
     let cartList = {
@@ -41,6 +41,10 @@ function getCartItems() {
     cartElems_.forEach(cartElem_ => {
         //--商品情報を持つ要素を取得
         let code_descElems_ = cartElem_.querySelectorAll("td.cart_tdl");
+        if(code_descElems_ == null) {
+            console.log("no item in this column.");
+            return;
+        }
         let descElem_ = code_descElems_[1].querySelectorAll("a")[1];
         let codeElem_ = code_descElems_[0].querySelector("a");
         let priceElem_ = cartElem_.querySelector("td.cart_tdcb span");
@@ -61,10 +65,15 @@ function getCartItems() {
                     price: price,
                     count: count
                 });
+                console.log("add products to cartlist.");
             }
         }
     });
     return cartList;
+}
+
+function getCartItems() {
+    
 }
 
 //--カートクエリからエクスポート

@@ -82,30 +82,9 @@ function showExportButton(product){
         }); 
     });
 
-    //--カートのアイテムを全て追加
-    let import_td = document.createElement("td");
-    let import_btn = document.createElement("input");
-    import_td.id = "imbutton";
-    import_btn.type = "button";
-    import_btn.value = "カートのアイテムを全て追加";
-    import_btn.addEventListener("click", function(){
-        chrome.tabs.query({active:true}, function(tabs) {
-            // let command = {
-            //     method: "cartitems",
-            // };
-            // chrome.tabs.sendMessage(tabs[0].id, command, function(response) {
-            //     response.forEach(function(item) {
-            //         addItem(item.desc, item.code, item.price, item.count);
-            //     });
-            // });
-        }); 
-    });
-
     //--
     export_td.appendChild(export_btn);
     add_tr.appendChild(export_td);
-    import_td.appendChild(import_btn);
-    add_tr.appendChild(import_td);
     table.appendChild(add_tr);
 }
 
@@ -205,6 +184,7 @@ function showCartList(){
     count_td.id = "sumcount";
     price_td.id = "sumprice";
     dummy_td.innerHTML = "合計";
+    dummy_td.id = "sumlabel";
     count_td.innerHTML = sumcount + "個";
     price_td.innerHTML = sumprice + "円";
     base.appendChild(dummy_td);
@@ -212,6 +192,52 @@ function showCartList(){
     base.appendChild(price_td);
 
     cartList.appendChild(base);
+}
+
+//--ウィッシュリスト一覧をdatalistに格納
+function showWishLists() {
+    //--datalistにリスト名をoptionsで投げる
+    let dlist = document.querySelector("#labels");
+    wishlist.wishlist.forEach(function(list){
+        let label_opt = document.createElement("option");
+        label_opt.value = list.name;
+        dlist.appendChild(label_opt);
+    });
+
+    //--初期値を設定
+    let listddl = document.querySelector("#labelinput");
+    listddl.value = wishlist.wishlist[wlindex].name;
+
+    //--イベントリスナを貼る
+    listddl.addEventListener("change", function(){
+        //--選択された名前のウィッシュリストを検索し、インデックスを返す
+        let index = -1;
+        wishlist.wishlist.filter(function(list,index_,array){
+            if(list.name == listddl.value){
+                index = index_;
+                return true;
+            }else{
+                return false;
+            }
+        });
+        if(index!=-1) {
+            wlindex = index;
+        }else{
+            //--なければ入力した名前でウィッシュリストを作成
+            createWishList(listddl.value);
+            wlindex = wishlist.wishlist.length - 1;       
+        }
+        saveWishList(); 
+        location.reload();
+    });
+    listddl.addEventListener("focus", function(){
+        //--フォーカスされたら値を消す
+        listddl.value = "";
+    });
+    listddl.addEventListener("blur", function(){
+        //--フォーカスが外れたら値を戻す
+        listddl.value = wishlist.wishlist[wlindex].name;
+    });
 }
 
 chrome.tabs.query({active:true}, function(tabs) {
@@ -239,8 +265,11 @@ chrome.tabs.query({active:true}, function(tabs) {
                 break;
         }
 
-        //--どっちにせよカートの中身は全部表示するんだなあ
+        //--どっちにせよカートの中身は表示
         showCartList();
+
+        //--ウィッシュリスト一覧もね
+        showWishLists();
 
     });    
 });

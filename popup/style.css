@@ -37,6 +37,7 @@ div{
     padding:0 10px;
     width: 49%;
     height: 100%;
+    font-size: 130%;
     line-height:30px;
     text-align: left;
 }
@@ -99,16 +100,9 @@ div{
 }
 
 /*-- インポート/エクスポート --*/
-#imbutton{
-    display: inline-block;
-    width: 192px;
-}
-#imbutton input{
-    width: 100%;
-}
 #exbutton{
     display: inline-block;
-    width: 192px;
+    width: 389px;
 }
 #exbutton input{
     width: 100%;
