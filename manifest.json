@@ -1,14 +1,14 @@
 {
     "manifest_version": 2,
     "name": "秋月ウィッシュリスト",
-    "version": "0.4",
+    "version": "2.0",
     "description": "ウィッシュリストを作成、表示します。",
     "permissions": ["tabs"],
     "icons": {
         "48": "icon48.png"
     },
     "browser_action": {
-        "default_popup": "popup/popup.html"
+        "default_popup": "popup/index.html"
     },
     "content_scripts": [
         {
@@ -16,7 +16,7 @@
                 "http://akizukidenshi.com/*"
             ],
             "js": [
-                "cScript.js"
+                "cscript/script.js"
             ]
         }
     ]

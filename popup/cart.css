@@ -13,13 +13,19 @@
 }
 #list .code{
     font-weight: bold;
+    text-align: left;
 }
 #list .price{
     width: 90px;
     text-align: right;
+    color: #c00;
+    font-size: 110%;
+    font-weight: bold;
 }
 #list .count{
     width: 90px;
+    font-size: 110%;
+    font-weight: bold;
     text-align: right;
 }
 #list .delete {
@@ -40,4 +46,9 @@
     font-weight: bold;
     font-size: 120%;
     text-align: right;
+    color: #c00;
+}
+#sumlabel{
+    font-size: 120%;
+    font-weight: bold;
 }

@@ -1,37 +1,109 @@
 /*
- * ポップアップ用css
+ * メインcss
 */
 
+/*-- 共通 --*/
+body{
+    margin: 0;
+}
+div{
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+/*-- 外装 --*/
 #wrapper{
-    width: 450px;
+    width: 400px;
     height: 580px;
+
+    background-color: #fff;
 }
 
-h2{
-    margin: 5px 0px;
+/*-- ウィッシュリスト変更バー --*/
+#listLabel{
+    box-sizing: border-box;
+    width: 390px;
+    height: 30px;
+    margin: 5px;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+}
+#listLabel span{
+    display: inline-block;
+    box-sizing: border-box;
+    margin: 0;
+    padding:0 10px;
+    width: 49%;
+    height: 100%;
+    font-size: 130%;
+    line-height:30px;
+    text-align: left;
 }
 
-input{
-    width: 100%;
-}
-td#label{
-    min-width: 200px;
-}
-
-#info{
-    font-weight: bold;
-    color: #a00;
-}
-
-div#listLabel{
-    height:40px;
-}
-div#cart{
-    height:400px;
-    overflow-y: scroll;
+/*-- リストに追加/更新 --*/
+#listItem{
+    box-sizing: border-box;
+    width: 390px;
+    height: 490px;
+    margin: 5px;
+    text-align: center;
+    overflow-y: auto;
     overflow-x: hidden;
 }
-div#add{
-    margin:5px 10px;
-    height:100px;
+#listPanel{
+    box-sizing: border-box;
+    width: 390px;
+    height: 30px;
+    margin: 5px;
+    text-align: center;
+    border-top: 1px #ccc solid;
+}
+#listPanel tr{
+    display: inline-block;
+    width: 390px;
+    height:30px;
+}
+#add_code{
+    box-sizing: border-box;
+    width:160px;
+    height:100%;
+    padding: 1px 3px;
+    line-height:30px;
+    font-size: 120%;
+    font-weight: bold;
+}
+#add_count{
+    box-sizing: border-box;
+    width:100px;
+    height:100%;
+}
+#add_count input{
+    display: inline-block;
+    margin:0;
+    padding:0;
+    width:90%;
+}
+#add_submit{
+    box-sizing: border-box;
+    width:100px;
+    height:100%;
+}
+
+/*-- リスト本体 --*/
+#items tr{
+    display: inline-block;
+    width: 390px;
+    height: 80px;
+    text-align: left;
+}
+
+/*-- インポート/エクスポート --*/
+#exbutton{
+    display: inline-block;
+    width: 389px;
+}
+#exbutton input{
+    width: 100%;
 }
