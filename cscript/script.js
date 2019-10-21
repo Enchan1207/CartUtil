@@ -16,7 +16,7 @@
 function getIteminfo() {
     let list = document.querySelectorAll("#goods_breadcrum div a");
     let desc = list[list.length - 1].innerHTML;
-    let code = /akizukidenshi.com\/catalog\/g\/g(.*)\//.exec(location.href)[1];
+    let code = /akizukidenshi.com\/catalog\/g\/g(.*)/.exec(location.href)[1];
     let price = /(\d)*$/.exec(document.querySelectorAll(".order_g .f14b")[1].innerText)[0];
     let count = document.querySelectorAll(".order_g .cart_tdc_sbn")[1].querySelector("input").value;
     let dat_ = {
