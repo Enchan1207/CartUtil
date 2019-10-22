@@ -36,14 +36,14 @@ And you can export items in list to cart anytime.
 ### On product page
 Detecting product page(matches `/akizukidenshi.com\/catalog\/g\/g(.*?)\/*$/`), `cscript/script.js` send product information to `popup/script.js`.  
 clicking extension icon, this screen is popup.  
-![add item screen]()  
+![add item screen](https://user-images.githubusercontent.com/51850597/67298010-a3ab0500-f525-11e9-9450-1dce829e3dfe.png)  
 confirm count to buy and click "追加", the item is added in selected wishlist.  
   
 __NOTE__ On initial state, "デフォルトウィッシュリスト" is selected (and user can't delete this wishlist).  
 
 ### On cart page
 click extension icon in cart page(matches `/akizukidenshi.com\/catalog\/cart\/*/`), this screen is popup.  
-![export screen]()  
+![export screen](https://user-images.githubusercontent.com/51850597/67298049-b02f5d80-f525-11e9-952d-306fd75be84b.png)  
 and click "エクスポート", items in list is exported cart.
 
 ### In popup page
