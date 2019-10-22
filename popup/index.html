@@ -18,10 +18,17 @@
         <div id="wrapper">
             <!-- ウィッシュリストラベル -->
             <div id="listLabel">
-                <span>ウィッシュリスト</span>
-                <span>
-                    <input type="text" autocomplete="on" list="labels" id="labelinput">
-                </span>
+                <table>
+                    <tr>
+                        <td>ウィッシュリスト</td>
+                        <td>
+                            <input type="text" autocomplete="on" list="labels" id="labelinput">
+                        </td>
+                        <td>
+                            <input type="button" id="listremove" value="削除">
+                        </td>
+                    </tr>
+                </table>
                 <!-- ここにリスト名が並ぶ -->
                 <datalist id="labels"></datalist>
             </div>

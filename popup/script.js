@@ -238,6 +238,28 @@ function showWishLists() {
         //--フォーカスが外れたら値を戻す
         listddl.value = wishlist.wishlist[wlindex].name;
     });
+
+    //--削除ボタンにイベントを当てる
+    let rmbtn = document.querySelector("#listremove");
+    rmbtn.addEventListener("click", function(){
+        //--選択された名前のウィッシュリストを検索し、インデックスを返す
+        let index = -1;
+        wishlist.wishlist.filter(function(list,index_,array){
+            if(list.name == listddl.value){
+                index = index_;
+                return true;
+            }else{
+                return false;
+            }
+        });
+        if(index != -1 && confirm(wishlist.wishlist[index].name +"を削除しますか?")) {
+            if(removeWishList(index) == 1){
+                alert("削除できません");
+            }
+        }
+        saveWishList(); 
+        location.reload();
+    });
 }
 
 chrome.tabs.query({active:true}, function(tabs) {

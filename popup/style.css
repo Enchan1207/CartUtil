@@ -25,28 +25,28 @@ div{
 #listLabel{
     box-sizing: border-box;
     width: 390px;
-    height: 30px;
+    height: 35px;
     margin: 5px;
     border-bottom: 1px solid #ccc;
     text-align: center;
 }
-#listLabel span{
+#listLabel table{
     display: inline-block;
     box-sizing: border-box;
-    margin: 0;
-    padding:0 10px;
-    width: 49%;
+    width: 100%;
     height: 100%;
+    margin: 0;
+    padding: 0px;
+}
+#listLabel td{
     font-size: 130%;
-    line-height:30px;
-    text-align: left;
 }
 
 /*-- リストに追加/更新 --*/
 #listItem{
     box-sizing: border-box;
     width: 390px;
-    height: 490px;
+    height: 485px;
     margin: 5px;
     text-align: center;
     overflow-y: auto;
