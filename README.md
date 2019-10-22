@@ -34,7 +34,7 @@ And you can export items in list to cart anytime.
  3. click "Load unpackaged extension" and select repository folder to install extension.
 
 ### On product page
-Detecting product page(matches `akizukidenshi.com\/catalog\/g\/g(.*)/`), `cscript/script.js` send product information to `popup/script.js`.  
+Detecting product page(matches `/akizukidenshi.com\/catalog\/g\/g(.*?)\/*$/`), `cscript/script.js` send product information to `popup/script.js`.  
 clicking extension icon, this screen is popup.  
 ![add item screen]()  
 confirm count to buy and click "追加", the item is added in selected wishlist.  
