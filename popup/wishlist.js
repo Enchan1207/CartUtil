@@ -33,6 +33,7 @@ function loadWishList() {
             "wishlist" : [
                 {
                     "name": "デフォルトウィッシュリスト",
+                    "isDefault": "true",
                     "products" : [
                     ]
                 }
@@ -115,8 +116,9 @@ function createWishList(name) {
     wishlist.wishlist.push(newList);
 }
 function removeWishList(index) {
-    if(wishlist.wishlist.length > 1){
+    if(wishlist.wishlist.length > 1 && index != 0){
         if(index == wlindex) wlindex--; //指定インデックスが参照中なら参照先を変える
+        if(wlindex < 0) wlindex = 0; //インデックスアンダーフロー対策
         wishlist.wishlist.splice(index, 1);
         return 0;
     }else{
