@@ -43,7 +43,7 @@ __NOTE__ On initial state, "デフォルトウィッシュリスト" is selected
 
 ### On cart page
 click extension icon in cart page(matches `/akizukidenshi.com\/catalog\/cart\/*/`), this screen is popup.  
-![export screen](https://user-images.githubusercontent.com/51850597/67298049-b02f5d80-f525-11e9-952d-306fd75be84b.png)  
+![export screen](https://user-images.githubusercontent.com/51850597/67298204-e4a31980-f525-11e9-88e1-c4f05f310e14.png)  
 and click "エクスポート", items in list is exported cart.
 
 ### In popup page
