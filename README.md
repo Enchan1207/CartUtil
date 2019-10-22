@@ -30,7 +30,7 @@ And you can export items in list to cart anytime.
 
 ### Installation
  1. clone this repository.
- 2. access [chrome://extensions](chrome://extensions) and enable "Developer mode".
+ 2. access `chrome://extensions` and enable "Developer mode".
  3. click "Load unpackaged extension" and select repository folder to install extension.
 
 ### On product page
