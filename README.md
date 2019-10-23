@@ -9,7 +9,7 @@ This extension is provide additional cart(similar to Amazon "wishlist") on your 
 Using localStorage to save cart items, so you dont need to think about cart clearing time.  
 And you can export items in list to cart anytime.
 
-## Development Enviromnent
+## Development Environment
 
  * Language: JavaScript/html/css
  * Browser: Google Chrome 77.0.3865.120
