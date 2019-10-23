@@ -100,10 +100,10 @@ div{
 }
 
 /*-- インポート/エクスポート --*/
-#exbutton{
+.exbutton{
     display: inline-block;
-    width: 389px;
+    width: 193px;
 }
-#exbutton input{
+.exbutton input{
     width: 100%;
 }

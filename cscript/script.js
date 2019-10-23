@@ -102,6 +102,14 @@ function listExport(cart){
     document.querySelector("#importcartsubmit").click();
 }
 
+//--カート初期化
+function cartClear() {
+    try {
+        document.querySelector("input[name=clear]").click();
+    } catch (error) {
+    }
+}
+
 //--メッセージ受信時の処理
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse){
     let command = message;    
@@ -134,6 +142,11 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse){
             location.href = command.href;
             break;
 
+        //--カート内容クリア
+        case "clear":
+            cartClear();
+            break;
+
         //--カート内容エクスポート
         case "export":
             listExport(command.items);
@@ -141,8 +154,10 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse){
     
         default:
             console.log("undefined method:" + command.method);
+            dat = {type: "received"};
             break;
     }
 
+    console.log("send:" + dat.type);
     sendResponse(dat);
 });

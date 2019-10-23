@@ -67,7 +67,7 @@ function showExportButton(product){
     //--カート内容をエクスポート
     let export_td = document.createElement("td");
     let export_btn = document.createElement("input");
-    export_td.id = "exbutton";
+    export_td.setAttribute("class", "exbutton");
     export_btn.type = "button";
     export_btn.value = "エクスポート";
     export_btn.addEventListener("click", function(){
@@ -82,9 +82,36 @@ function showExportButton(product){
         }); 
     });
 
+    //--カート内容を空にしてエクスポート
+    let exclr_td = document.createElement("td");
+    let exclr_btn = document.createElement("input");
+    exclr_td.setAttribute("class", "exbutton");
+    exclr_btn.type = "button";
+    exclr_btn.value = "空にしてエクスポート";
+    exclr_btn.addEventListener("click", function(){
+        chrome.tabs.query({active:true}, function(tabs) {
+            let command = {
+                method: "clear",
+            };
+            chrome.tabs.sendMessage(tabs[0].id, command, function(res) {
+                setTimeout(() => {
+                    let command = {
+                        method: "export",
+                        items: convertList()
+                    };
+                    chrome.tabs.sendMessage(tabs[0].id, command, function(res) {
+                        console.log(res); 
+                    });
+                }, 1000);
+            });
+        }); 
+    });
+
     //--
     export_td.appendChild(export_btn);
     add_tr.appendChild(export_td);
+    exclr_td.appendChild(exclr_btn);
+    add_tr.appendChild(exclr_td);
     table.appendChild(add_tr);
 }
 
