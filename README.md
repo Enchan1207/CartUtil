@@ -14,9 +14,12 @@ And you can export items in list to cart anytime.
  * Language: JavaScript/html/css
  * Browser: Google Chrome 77.0.3865.120
 
-## Latest Release
-__New UI!__  
-![Rebuilded UI](https://user-images.githubusercontent.com/51850597/67546287-00c9d500-f737-11e9-99ca-b94d37537740.png)  
+## Latest Release - New UI
+![Rebuilded UI](https://user-images.githubusercontent.com/51850597/67546287-00c9d500-f737-11e9-99ca-b94d37537740.png)
+
+ * rebuilded css
+ * change item count in list
+ * extensions icon
 
 ## Contents
 
