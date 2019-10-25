@@ -1,0 +1,19 @@
+/*
+ * フレームcss
+*/
+
+body{
+    background-color: #fde1f4;
+}
+div{
+    box-sizing: border-box;
+    width:100%;
+    padding:1px;
+    background-color: #fff;
+}
+div#wrapper{
+    margin: 0px;
+    padding: 2px;
+    width: 310px;
+    height: 580px;
+}

@@ -82,36 +82,9 @@ function showExportButton(product){
         }); 
     });
 
-    //--カート内容を空にしてエクスポート
-    let exclr_td = document.createElement("td");
-    let exclr_btn = document.createElement("input");
-    exclr_td.setAttribute("class", "exbutton");
-    exclr_btn.type = "button";
-    exclr_btn.value = "空にしてエクスポート";
-    exclr_btn.addEventListener("click", function(){
-        chrome.tabs.query({active:true}, function(tabs) {
-            let command = {
-                method: "clear",
-            };
-            chrome.tabs.sendMessage(tabs[0].id, command, function(res) {
-                setTimeout(() => {
-                    let command = {
-                        method: "export",
-                        items: convertList()
-                    };
-                    chrome.tabs.sendMessage(tabs[0].id, command, function(res) {
-                        console.log(res); 
-                    });
-                }, 1000);
-            });
-        }); 
-    });
-
     //--
     export_td.appendChild(export_btn);
     add_tr.appendChild(export_td);
-    exclr_td.appendChild(exclr_btn);
-    add_tr.appendChild(exclr_td);
     table.appendChild(add_tr);
 }
 
@@ -134,7 +107,7 @@ function showCartList(){
         img_td.appendChild(image);
         base1.appendChild(img_td);
 
-        //--商品コード＋商品名
+        //--商品名
         let link_a = document.createElement("a");
         link_a.href = "http://akizukidenshi.com/catalog/g/g" + item.code;
         //クリック時はhrefで飛ばずにmessage経由で
@@ -151,16 +124,29 @@ function showCartList(){
             });
         });
         let name_td = document.createElement("td");
-        name_td.colSpan = 2
+        name_td.colSpan = 3;
         name_td.setAttribute("class", "code");
-        link_a.innerHTML = "[" + item.code + "] " + item.desc;
+        link_a.innerHTML = item.desc;
         name_td.appendChild(link_a);
         base1.appendChild(name_td);
 
+        //--商品コード
+        let code_td = document.createElement("td");
+        code_td.innerHTML = item.code;
+        code_td.setAttribute("class", "count");
+        base2.appendChild(code_td);
+
         //--購入個数
         let count_td = document.createElement("td");
+        let count_listinput = document.createElement("input");
+        let count_span = document.createElement("span");
+        count_listinput.style = "text-align:right;width:60%;bordr:1px solid #ccc;border-radius:2px;";
+        count_listinput.value = item.count;
         count_td.setAttribute("class", "count");
-        count_td.innerHTML = item.count + "個";
+        count_span.innerHTML = "個";
+        count_span.style = "width:40%;";
+        count_td.appendChild(count_listinput);
+        count_td.appendChild(count_span);
         base2.appendChild(count_td);
 
         //--価格
@@ -186,7 +172,7 @@ function showCartList(){
         //--アイテムセパレータ
         let base3 = document.createElement("tr");
         let sep_td = document.createElement("td");
-        sep_td.colSpan = 4;
+        sep_td.colSpan = 5;
         sep_td.setAttribute("class", "sepline");
         sep_td.appendChild(document.createElement("hr"));
         base3.appendChild(sep_td);
@@ -211,6 +197,7 @@ function showCartList(){
     count_td.id = "sumcount";
     price_td.id = "sumprice";
     dummy_td.innerHTML = "合計";
+    dummy_td.colSpan = 2;
     dummy_td.id = "sumlabel";
     count_td.innerHTML = sumcount + "個";
     price_td.innerHTML = sumprice + "円";

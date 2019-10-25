@@ -2,8 +2,17 @@
  * カート用css
 */
 
+#listItem{
+    box-sizing: border-box;
+    border: 1px #ccc solid;
+    height:475px;
+    overflow-y: auto;
+}
 #list tr{
     height: 25px;
+}
+#list hr{
+    border: 1px dotted #ccc;
 }
 #list .icon{
     width:50px;
@@ -14,17 +23,20 @@
 #list .code{
     font-weight: bold;
     text-align: left;
+    font-size: 110%;
 }
 #list .price{
     width: 90px;
     text-align: right;
     color: #c00;
-    font-size: 110%;
+    font-size: 120%;
     font-weight: bold;
 }
 #list .count{
     width: 90px;
-    font-size: 110%;
+    font-size: 95%;
+    height:18px;
+    padding-right: 10px;
     font-weight: bold;
     text-align: right;
 }
@@ -34,6 +46,7 @@
 }
 #list .delete input{
     width: 50px;
+    border-radius: 5px;
     margin: 0;
 }
 

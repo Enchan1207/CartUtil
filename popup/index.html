@@ -6,8 +6,12 @@
 <html lang="ja">
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="style.css">
-        <link rel="stylesheet" href="cart.css">
+        <!-- <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="cart.css"> -->
+        <link rel="stylesheet" href="css/body.css">
+        <link rel="stylesheet" href="css/wlddl.css">
+        <link rel="stylesheet" href="css/cart.css">
+        <link rel="stylesheet" href="css/panel.css">
 
         <script src="wishlist.js"></script>
         <script src="script.js"></script>
@@ -20,15 +24,18 @@
             <div id="listLabel">
                 <table>
                     <tr>
-                        <td>ウィッシュリスト</td>
-                        <td>
+                        <!-- ウィッシュリスト選択欄 -->
+                        <td class="listddl">
                             <input type="text" autocomplete="on" list="labels" id="labelinput">
                         </td>
-                        <td>
-                            <input type="button" id="listremove" value="削除">
+
+                        <!-- 変更/作成、削除ボタン -->
+                        <td class="listbtn">
+                            <input type="button" id="deletebtn" value="削除">
                         </td>
                     </tr>
                 </table>
+
                 <!-- ここにリスト名が並ぶ -->
                 <datalist id="labels"></datalist>
             </div>
