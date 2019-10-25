@@ -140,8 +140,13 @@ function showCartList(){
         let count_td = document.createElement("td");
         let count_listinput = document.createElement("input");
         let count_span = document.createElement("span");
-        count_listinput.style = "text-align:right;width:60%;bordr:1px solid #ccc;border-radius:2px;";
+        count_listinput.type = "text";
         count_listinput.value = item.count;
+        count_listinput.addEventListener("change", function() {
+            addItem(item.code, item.desc, "" + item.price, count_listinput.value);
+            saveWishList();
+            location.reload();
+        })
         count_td.setAttribute("class", "count");
         count_span.innerHTML = "個";
         count_span.style = "width:40%;";
@@ -188,7 +193,8 @@ function showCartList(){
         sumcount += item.count;
     });
 
-    //--リストの最下端に合計金額バーを追加
+    //--リストの外に合計金額テーブルを追加
+    let sumtable = document.querySelector("#sumTable table");
     let base = document.createElement("tr");
     base.id = "sum_tr";
     let dummy_td = document.createElement("td");
@@ -205,7 +211,7 @@ function showCartList(){
     base.appendChild(count_td);
     base.appendChild(price_td);
 
-    cartList.appendChild(base);
+    sumtable.appendChild(base);
 }
 
 //--ウィッシュリスト一覧をdatalistに格納
@@ -276,6 +282,7 @@ function showWishLists() {
     });
 }
 
+//--ポップアップスクリプト
 chrome.tabs.query({active:true}, function(tabs) {
     loadWishList();
 

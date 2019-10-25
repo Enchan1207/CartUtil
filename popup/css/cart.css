@@ -5,9 +5,13 @@
 #listItem{
     box-sizing: border-box;
     border: 1px #ccc solid;
-    height:475px;
+    height:445px;
     overflow-y: auto;
 }
+#sumTable{
+    height: 30px;
+}
+
 #list tr{
     height: 25px;
 }
@@ -34,11 +38,19 @@
 }
 #list .count{
     width: 90px;
-    font-size: 95%;
-    height:18px;
+    font-size: 110%;
+    height:20px;
+    padding-top: 5px;
     padding-right: 10px;
     font-weight: bold;
     text-align: right;
+}
+#list .count input{
+    line-height: 20px;
+    text-align:right;
+    width:60%;
+    border:1px solid #ccc;
+    border-radius:2px;
 }
 #list .delete {
     width:50px;
@@ -54,14 +66,20 @@
     font-weight: bold;
     font-size: 120%;
     text-align: right;
+    width:30%;
 }
 #sumprice{
     font-weight: bold;
     font-size: 120%;
     text-align: right;
     color: #c00;
+    width: 35%;
 }
 #sumlabel{
     font-size: 120%;
     font-weight: bold;
+    width: 35%;
+}
+#sum, #sum tr{
+    width:90%;
 }
