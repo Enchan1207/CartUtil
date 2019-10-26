@@ -1,30 +1,23 @@
 # CartUtil
 
 ## OverView
-Chrome Extension for [akizukidenshi.com](http://akizukidenshi.com) providing wishlist.  
-
-## Description
-[akizukidenshi](http://akizukideshi.com)s cart items is cleared every 48 hours(=2 days).  
-This extension is provide additional cart(similar to Amazon "wishlist") on your browser.  
-Using localStorage to save cart items, so you dont need to think about cart clearing time.  
-And you can export items in list to cart anytime.
+Chrome Extension for [akizukidenshi.com](http://akizukidenshi.com) and [switch-science.com](https://www.switch-science.com/) providing wishlist.  
 
 ## Development Environment
 
  * Language: JavaScript/html/css
  * Browser: Google Chrome 77.0.3865.120
 
-## Latest Release - New UI
-![Rebuilded UI](https://user-images.githubusercontent.com/51850597/67546287-00c9d500-f737-11e9-99ca-b94d37537740.png)
+## Latest Release - support SwitchSciences products
+![support ssci](https://user-images.githubusercontent.com/51850597/67613681-41832600-f7eb-11e9-8cc9-66dd632acf21.png)  
+![support ssci - cart](https://user-images.githubusercontent.com/51850597/67613682-421bbc80-f7eb-11e9-8a48-93cb6808d1ab.png)  
 
- * rebuilded css
- * change item count in list
- * extensions icon
+ * support [switchscience](https://www.switch-science.com/)
 
 ## Contents
 
  * manifest.json: chrome ext manifest file
- * icon.png: ext icon(now printing)
+ * icon.png: ext icon (using FET as a motif)
  * popup/
 	* index.html: popup html (main html)
 	* script.js: popup script
