@@ -10,7 +10,7 @@
 */
 
 //--追加ボタンを表示
-function showAddButton(product) {
+function showAddButton(type,product) {
     let table = document.querySelector("#panel");
     let add_tr = document.createElement("tr");
 
@@ -23,8 +23,8 @@ function showAddButton(product) {
     let count_td = document.createElement("td");
     count_td.id = "add_count";
     let count_input = document.createElement("input");
-    if(getItemByCode(product.code) != undefined){
-        count_input.value = getItemByCode(product.code).count;
+    if(getItemByCode(type, product.code) != undefined){
+        count_input.value = getItemByCode(type, product.code).count;
     }else{
         count_input.value = product.count
     }
@@ -37,7 +37,7 @@ function showAddButton(product) {
     let submit_input = document.createElement("input");
     submit_input.type = "button";
     submit_input.autofocus = true;
-    if(searchItem(product.code) != 0){
+    if(searchItem(type, product.code) != 0){
         submit_input.value = "更新";
     }else{
         submit_input.value = "追加";
@@ -53,14 +53,15 @@ function showAddButton(product) {
     //--追加したボタンにイベントを当てる
     submit_input.addEventListener("click", function(){
         let count = document.querySelector("#add_countinput").value;
-        addItem(product.code, product.desc, product.price, count);
+        
+        addItem(type, product.icon, product.code, product.desc, product.price, count);
         saveWishList();
         location.reload();
     });
 }
 
 //--エクスポートボタンを表示
-function showExportButton(product){
+function showExportButton(type){
     let table = document.querySelector("#panel");
     let add_tr = document.createElement("tr");
 
@@ -74,7 +75,8 @@ function showExportButton(product){
         chrome.tabs.query({active:true}, function(tabs) {
             let command = {
                 method: "export",
-                items: convertList()
+                site: type,
+                items: convertList(type)
             };
             chrome.tabs.sendMessage(tabs[0].id, command, function(res) {
                 console.log(res);
@@ -89,12 +91,12 @@ function showExportButton(product){
 }
 
 //--カート一覧を展開
-function showCartList(){
+function showCartList(type){
     //--リスト一覧を展開
     let cartList = document.querySelector("#list");
     let sumcount = 0;
     let sumprice = 0;
-    wishlist.wishlist[wlindex].products.forEach(function(item, index) {
+    wishlist.wishlist[wlindex[type]].products.forEach(function(item) {
         let base1 = document.createElement("tr");
         let base2 = document.createElement("tr");
 
@@ -103,7 +105,7 @@ function showCartList(){
         let img_td = document.createElement("td");
         img_td.rowSpan = 2;
         img_td.setAttribute("class", "icon");
-        image.src = "http://akizukidenshi.com/img/goods/L/" + item.code + ".jpg";
+        image.src = item.icon;
         img_td.appendChild(image);
         base1.appendChild(img_td);
 
@@ -143,7 +145,7 @@ function showCartList(){
         count_listinput.type = "text";
         count_listinput.value = item.count;
         count_listinput.addEventListener("change", function() {
-            addItem(item.code, item.desc, "" + item.price, count_listinput.value);
+            addItem(type, item.icon, item.code, item.desc, "" + item.price, count_listinput.value);
             saveWishList();
             location.reload();
         })
@@ -169,7 +171,7 @@ function showCartList(){
         del_btn.type = "button";
         del_btn.value = "削除";
         del_btn.addEventListener("click", function(){
-            removeItemByCode(del_btn.getAttribute("data-delcode"));
+            removeItemByCode(type, del_btn.getAttribute("data-delcode"));
             saveWishList();
             location.reload();
         });
@@ -215,10 +217,16 @@ function showCartList(){
 }
 
 //--ウィッシュリスト一覧をdatalistに格納
-function showWishLists() {
-    //--datalistにリスト名をoptionsで投げる
+function showWishLists(type) {
+    //--datalistにリスト名をoptionsで投げる(typeで絞り込む)
     let dlist = document.querySelector("#labels");
-    wishlist.wishlist.forEach(function(list){
+    let wl = wishlist.wishlist.filter(function(list, index){
+        if(list.type == type){
+            return true;
+        }
+        return false;
+    });
+    wl.forEach(function(list){
         let label_opt = document.createElement("option");
         label_opt.value = list.name;
         dlist.appendChild(label_opt);
@@ -226,7 +234,7 @@ function showWishLists() {
 
     //--初期値を設定
     let listddl = document.querySelector("#labelinput");
-    listddl.value = wishlist.wishlist[wlindex].name;
+    listddl.value = wishlist.wishlist[wlindex[type]].name;
 
     //--イベントリスナを貼る
     listddl.addEventListener("change", function(){
@@ -241,11 +249,11 @@ function showWishLists() {
             }
         });
         if(index!=-1) {
-            wlindex = index;
+            wlindex[type] = index;
         }else{
             //--なければ入力した名前でウィッシュリストを作成
-            createWishList(listddl.value);
-            wlindex = wishlist.wishlist.length - 1;       
+            createWishList(listddl.value, type);
+            wlindex[type] = wishlist.wishlist.length - 1;
         }
         saveWishList(); 
         location.reload();
@@ -256,7 +264,7 @@ function showWishLists() {
     });
     listddl.addEventListener("blur", function(){
         //--フォーカスが外れたら値を戻す
-        listddl.value = wishlist.wishlist[wlindex].name;
+        listddl.value = wishlist.wishlist[wlindex[type]].name;
     });
 
     //--削除ボタンにイベントを当てる
@@ -264,8 +272,8 @@ function showWishLists() {
     rmbtn.addEventListener("click", function(){
         //--選択された名前のウィッシュリストを検索し、インデックスを返す
         let index = -1;
-        wishlist.wishlist.filter(function(list,index_,array){
-            if(list.name == listddl.value){
+        wishlist.wishlist.filter(function(list,index_){
+            if(list.name == listddl.value && list.type == type){
                 index = index_;
                 return true;
             }else{
@@ -273,7 +281,7 @@ function showWishLists() {
             }
         });
         if(index != -1 && confirm(wishlist.wishlist[index].name +"を削除しますか?")) {
-            if(removeWishList(index) == 1){
+            if(removeWishList(type, index) == 1){
                 alert("削除できません");
             }
         }
@@ -287,40 +295,44 @@ chrome.tabs.query({active:true}, function(tabs) {
     loadWishList();
 
     //--ページタイプを取得
-    Transaction(tabs[0], "pageType").then(function(response){
+    Transaction(tabs[0], "pageType", "").then(function(response){
         let pageType = response.type;
-        
+        let siteType = response.site;
+
+        //--bodyタグに色を付ける
+        document.querySelector("body").id = siteType;
+
         switch (pageType) {
             //--商品ページの場合 -> 追加ボタンを表示
             case "product":
-                Transaction(tabs[0], "productInfo").then(function(response){
-                    showAddButton(response);
+                Transaction(tabs[0], "productInfo", siteType).then(function(response){
+                    showAddButton(siteType, response);
                 });
                 break;
 
             //--カートの場合 -> エクスポートボタンを表示
             case "cart":
-                showExportButton();
+                showExportButton(siteType);
                 break;
         
             default:
-                console.log("processi undefined.");
+                console.log("process undefined.");
                 break;
         }
 
         //--どっちにせよカートの中身は表示
-        showCartList();
+        showCartList(siteType);
 
         //--ウィッシュリスト一覧もね
-        showWishLists();
+        showWishLists(siteType);
 
     });    
 });
 
 //--コンテンツスクリプトに任意メッセージを送信し、コールバックからデータを受け取る
-function Transaction(tab, message) {
+function Transaction(tab, message, site) {
     return new Promise(function(resolve, reject){
-        chrome.tabs.sendMessage(tab.id, {method: message}, function(res) {
+        chrome.tabs.sendMessage(tab.id, {method: message, site:site}, function(res) {
             resolve(res);
         });
     });

@@ -1,8 +1,8 @@
 {
     "manifest_version": 2,
-    "name": "秋月ウィッシュリスト",
-    "version": "2.0.2",
-    "description": "ウィッシュリストを作成、表示します。",
+    "name": "ガジェットウィッシュリスト",
+    "version": "3.0.0",
+    "description": "秋月電子、スイッチサイエンスに「欲しいものリスト」を追加します。",
     "permissions": ["tabs"],
     "icons": {
         "48": "icon48.png"
@@ -13,7 +13,8 @@
     "content_scripts": [
         {
             "matches": [
-                "http://akizukidenshi.com/*"
+                "http://akizukidenshi.com/*",
+                "https://www.switch-science.com/*"
             ],
             "js": [
                 "cscript/script.js"
@@ -22,6 +23,6 @@
     ],
     "options_ui": {
         "page": "options/index.html",
-        "chrome_style": true    
+        "chrome_style": true 
     } 
 }

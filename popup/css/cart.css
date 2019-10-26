@@ -5,7 +5,7 @@
 #listItem{
     box-sizing: border-box;
     border: 1px #ccc solid;
-    height:445px;
+    height:440px;
     overflow-y: auto;
 }
 #sumTable{

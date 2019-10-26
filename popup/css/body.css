@@ -2,8 +2,11 @@
  * フレームcss
 */
 
-body{
+body#aki{
     background-color: #fde1f4;
+}
+body#ssci{
+    background-color: #222;
 }
 div{
     box-sizing: border-box;
