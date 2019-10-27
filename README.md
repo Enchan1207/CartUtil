@@ -8,11 +8,11 @@ Chrome Extension for [akizukidenshi.com](http://akizukidenshi.com) and [switch-s
  * Language: JavaScript/html/css
  * Browser: Google Chrome 77.0.3865.120
 
-## Latest Release - show item place(only akizukidenshi)
+## Latest Release - show item place(only 秋月電子)
 ![item place](https://user-images.githubusercontent.com/51850597/67628051-bbc2b180-f8a2-11e9-9d31-67fb7aaaa56e.png)  
 
- * show item place on akizukidenshis cart page
- * some additional in content script
+ * show item place on cart page
+ * some additional css in content script
 
 ## Contents
 
@@ -47,7 +47,7 @@ __NOTE__ On initial state, "デフォルトウィッシュリスト" is selected
 __Export items__  
 To export, click "エクスポート" in popup.  
   
-__Export item place information__
+__Export item place information__  
 To see item place, click"店舗情報を展開" in popup.  
 
 ### Popup page
