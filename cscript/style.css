@@ -1,0 +1,72 @@
+/*
+ * 店舗情報用css
+*/
+
+/*-- 枠線、セル色 --*/
+#placeinfo{
+    margin-top:5px;
+}
+#placeinfo>table{
+    border: 1px #eee solid;
+}
+#placeinfo tr#caption{
+    background-color: #ccc;
+}
+#placeinfo tr{
+    border: 1px #eee solid;
+}
+#placeinfo td{
+    margin:1px;
+    background-color: #eee;
+}
+
+/*-- キャプション --*/
+#placeinfo tr#caption td{
+    font-size: 130%;
+    font-weight: bold;
+    text-align: center;
+    color:#000;
+}
+
+/*-- アイコン --*/
+#placeinfo td.icon{
+    width:10%;
+}
+#placeinfo td.icon>img{
+    width:100%;
+}
+
+/*-- 商品説明 --*/
+#placeinfo td.desc{
+    width:25%;
+}
+
+/*-- 陳列位置 --*/
+#placeinfo td.place{
+    width:35%;
+}
+
+/*-- 通販コード --*/
+#placeinfo td.code{
+    width:10%;
+    text-align: right;
+}
+
+/*-- 購入数量 --*/
+#placeinfo td.count{
+    width:10%;
+    text-align: right;
+}
+
+/*-- 単価×数量 --*/
+#placeinfo td.price{
+    width:10%;
+    text-align: right;
+    color: #c00;
+    font-weight: bold;
+}
+
+/*-- 合計金額表示 --*/
+#placeinfo #sum td{
+    font-size: 130%;
+}

@@ -12,7 +12,7 @@
 
 /*-- エクスポートボタン --*/
 #listPanel td.exbutton{
-    width:100%;
+    width:50%;
 }
 #listPanel td.exbutton input{
     border-radius: 5px;

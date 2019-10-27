@@ -84,9 +84,32 @@ function showExportButton(type){
         }); 
     });
 
+    //--各商品について「店舗情報」を展開
+    let placeinfo_td = document.createElement("td");
+    let placeinfo_btn = document.createElement("input");
+    placeinfo_td.setAttribute("class", "exbutton");
+    placeinfo_btn.type = "button";
+    placeinfo_btn.value = "店舗情報を展開";
+    placeinfo_btn.addEventListener("click", function(){
+        chrome.tabs.query({active:true}, function(tabs) {
+            let command = {
+                method: "placeinfo",
+                site: type,
+                items: wishlist.wishlist[wlindex[type]].products
+            };
+            console.log(command);
+            
+            chrome.tabs.sendMessage(tabs[0].id, command, function(res) {
+                console.log(res);
+            });
+        }); 
+    });
+
     //--
     export_td.appendChild(export_btn);
     add_tr.appendChild(export_td);
+    placeinfo_td.appendChild(placeinfo_btn);
+    add_tr.appendChild(placeinfo_td);
     table.appendChild(add_tr);
 }
 

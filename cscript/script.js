@@ -170,6 +170,91 @@ function listExport(site, cart){
     }
 }
 
+//--店舗情報を展開
+function placeInfoExport(cart){
+    //--ヘッダ部分以外を吹っ飛ばす
+    let target = document.querySelector("#wrapper");
+    let remain = document.querySelector("div#header");
+    target.innerHTML = remain.outerHTML;
+    target = document.querySelector("#wrapper");
+
+    //--新しい格納場所を作る
+    let placediv = document.createElement("div");
+    placediv.id = "placeinfo";
+    let placeTable = document.createElement("table");
+    placediv.appendChild(placeTable);
+    target.appendChild(placediv);
+
+    //--一行目にキャプションを振る
+    let caption_tr = document.createElement("tr");
+    caption_tr.id = "caption";
+    caption_tr.appendChild(createTag("td", "desc", "商品説明", 2));
+    caption_tr.appendChild(createTag("td", "place", "陳列位置"));
+    caption_tr.appendChild(createTag("td", "code", "通販コード"));
+    caption_tr.appendChild(createTag("td", "count", "購入数量"));
+    caption_tr.appendChild(createTag("td", "price", "単価×数量"));
+    placeTable.appendChild(caption_tr);
+
+    //--setIntervalでxhr叩いて、レスポンスかえってくるごとにtrを増やす
+    let allcount = 0, allprice = 0; //合計数量と合計金額
+    let placehandler = setInterval(function(){
+        if(cart.length != 0){
+            let item = cart[0];
+            let item_tr = document.createElement("tr");
+
+            //--アイコン用imgを構成
+            let icon = document.createElement("img");
+            icon.src = item.icon;
+
+            //--xhrで陳列位置をとってくる
+            let place = "";
+            let xhr = new XMLHttpRequest();
+            xhr.open("GET", "http://akizukidenshi.com/catalog/goods/warehouseinfo.aspx?goods=" + item.code, true);
+            xhr.onload = function (event) {
+                console.log(xhr.status);
+                allcount += item.count;
+                allprice += Number(item.count) * Number(item.price);
+                let respDOM = new DOMParser().parseFromString(xhr.responseText, "text/html");
+                let placeElem = respDOM.querySelector("table");
+                item_tr.appendChild(createTag("td", "icon", icon.outerHTML));
+                item_tr.appendChild(createTag("td", "desc", item.desc));
+                item_tr.appendChild(createTag("td", "place", placeElem.outerHTML));
+                item_tr.appendChild(createTag("td", "code", item.code));
+                item_tr.appendChild(createTag("td", "count", item.count + "個"));
+                item_tr.appendChild(createTag("td", "price", (Number(item.count) * Number(item.price)) + "円"));
+                placeTable.appendChild(item_tr);
+            };
+            xhr.send();
+            cart.shift(); //先頭を削除
+        }else{
+            //--setintervalをクリア
+            clearInterval(placehandler);
+            console.log("list complete.");
+
+            //--一番下に合計金額バーを表示
+            let sum_tr = document.createElement("tr");
+            sum_tr.id = "sum";
+            sum_tr.appendChild(createTag("td", "desc", "合計金額", 4));
+            sum_tr.appendChild(createTag("td", "count", allcount + "個"));
+            sum_tr.appendChild(createTag("td", "price", allprice + "円"));
+            placeTable.appendChild(sum_tr);
+        }
+    }, 1000);
+
+    //--クラス名とinnerHTMLを指定してタグ生成
+    function createTag(tagname, clname, content, colspan){
+        let tar_ = document.createElement(tagname);
+        if(colspan != undefined){
+            tar_.colSpan = colspan;
+        }
+        tar_.setAttribute("class", clname);
+        tar_.innerHTML = content;
+        return tar_;
+    }
+
+
+}
+
 //--カート初期化
 function cartClear(site) {
     try {
@@ -239,6 +324,13 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse){
         //--カート内容エクスポート
         case "export":
             listExport(command.site, command.items);
+            break;
+
+        //--店舗情報を展開
+        case "placeinfo":
+            if(command.site == "aki"){
+                placeInfoExport(command.items);
+            }
             break;
     
         default:
