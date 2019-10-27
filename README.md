@@ -9,8 +9,7 @@ Chrome Extension for [akizukidenshi.com](http://akizukidenshi.com) and [switch-s
  * Browser: Google Chrome 77.0.3865.120
 
 ## Latest Release - show item place(only akizukidenshi)
-![support ssci](https://user-images.githubusercontent.com/51850597/67613681-41832600-f7eb-11e9-8cc9-66dd632acf21.png)  
-![support ssci - cart](https://user-images.githubusercontent.com/51850597/67613682-421bbc80-f7eb-11e9-8a48-93cb6808d1ab.png)  
+![item place](https://user-images.githubusercontent.com/51850597/67628051-bbc2b180-f8a2-11e9-9d31-67fb7aaaa56e.png)  
 
  * show item place on akizukidenshis cart page
  * some additional in content script
