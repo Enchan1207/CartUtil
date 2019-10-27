@@ -1,12 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <div id="wrapper" style="width:800px;height:400px;background:#f0f;"></div>
-</body>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="style.css">
+        <script src="../popup/wishlist.js"></script>
+        <script src="manage.js"></script>
+        <script src="script.js"></script>
+    </head>
+    <body>
+        <div id="wrapper">
+            <div id="panel">
+                <h1>Options</h1>
+                <hr>
+                <h3>リスト管理</h3>
+                <table>
+                    <tr class="label">
+                        <td colspan="3">リストを共有または削除</td>
+                    </tr>
+                    <tr>
+                        <td class="selector">
+                            <input type="text" autocomplete="on" list="list">
+                            <datalist id="list"></datalist>
+                        </td>
+                        <td class="button">
+                            <input type="button" value="共有" id="share">
+                        </td>
+                        <td class="button">
+                            <input type="button" value="削除" id="delete">
+                        </td>
+                    </tr>
+                    <tr class="label">
+                        <td colspan="2">共有リストをダウンロード</td>
+                    </tr>
+                    <tr>
+                        <td class="selector">
+                            <input type="text" placeholder="共有コードを入力" id="download">
+                        </td>
+                        <td class="button">
+                            <input type="button" value="検索">
+                        </td>
+                    </tr>
+    
+                </table>
+                <hr>
+                <h3>共有について</h3>
+                <table>
+                    <tr>
+                        <td>
+                            ウィッシュリストを共有すると「共有コード」が発行されます。
+                            このコードをほかのPCに入力すると、共有したリストのコピーが生成されます。<br>
+                            共有コードの有効期限は発行後一週間となります。期限の切れた共有コードは使用できなくなります。<br>
+                            また、リストを共有した時点で拡張機能の制作者はリストの内容を確認できるようになりますのでご注意ください。
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div id="info">
+                <h2>オプションページの機能は現在開発中です。</h2>
+                将来的にリストの共有等を計画していますが、ver3.2.0では実装されていません。
+            </div>
+        </div>
+    </body>
 </html>

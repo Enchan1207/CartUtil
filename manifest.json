@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "ガジェットウィッシュリスト",
-    "version": "3.1.0",
+    "version": "3.2.0",
     "description": "秋月電子、スイッチサイエンスに「欲しいものリスト」を追加します。",
     "permissions": ["tabs"],
     "icons": {

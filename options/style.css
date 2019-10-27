@@ -1,0 +1,70 @@
+/*
+ * オプションページ用CSS
+*/
+
+/*-- メインフレーム --*/
+body{
+    background-color: #eee;
+}
+div#wrapper{
+    width:500px;
+    height:350px;
+    background-color: #fff;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding:15px;
+}
+table{
+    box-sizing: border-box;
+    width:100%;
+    padding-left:5%;
+}
+tr{
+    width:100%;
+}
+
+/*-- ボタン類 --*/
+td.selector{
+    width:50%;
+}td.selector>input{
+    width:100%;
+}
+td.selector>select{
+    width:100%;
+}
+td.button{
+    width:25%;
+}
+td.button>input{
+    width:100%;
+}
+input#delete{
+    color:#c00;
+    font-weight: bold;
+}
+
+/*-- 汎用情報ウィンドウ --*/
+div#info{
+    position: absolute;
+    box-sizing: border-box;
+    top:10%;
+    left:10%;
+    width:80%;
+    height:80%;
+    padding:5%;
+    
+    background-color: #fff;
+    border-radius: 5px;
+    border: 1px #ccc solid;
+    /* display: none; */
+}
+
+div#panel{
+    opacity: 0.5;
+    pointer-events: none;
+} 
+div#panel h2{
+    text-align: center;
+    margin:0;
+    padding:0;
+}
