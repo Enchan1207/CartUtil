@@ -1,14 +1,17 @@
 {
     "manifest_version": 2,
-    "name": "ガジェットウィッシュリスト",
-    "version": "3.2.0",
-    "description": "秋月電子、スイッチサイエンスに「欲しいものリスト」を追加します。",
-    "permissions": ["tabs"],
+    "name": "CartUtil",
+    "version": "1.5.0",
+    "description": "共有可能なウィッシュリストを提供します。",
+    "permissions": [
+        "tabs",
+        "storage"
+    ],
     "icons": {
-        "48": "icon48.png"
+        "48": "assets/icons/icon48.png"
     },
     "browser_action": {
-        "default_popup": "popup/index.html"
+        "default_popup": "src/popup/index.html"
     },
     "content_scripts": [
         {
@@ -16,12 +19,16 @@
                 "http://akizukidenshi.com/*",
                 "https://www.switch-science.com/*"
             ],
-            "js": ["cscript/script.js"],
-            "css": ["cscript/style.css"]
+            "js": [
+                "src/cscript/script.js"
+            ],
+            "css": [
+                "src/cscript/style.css"
+            ]
         }
     ],
     "options_ui": {
-        "page": "options/index.html",
-        "chrome_style": true 
-    } 
+        "page": "src/options/index.html",
+        "chrome_style": true
+    }
 }
