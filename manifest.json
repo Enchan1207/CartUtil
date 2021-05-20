@@ -5,32 +5,44 @@
     "description": "共有可能なウィッシュリストを提供します。",
     "permissions": [
         "tabs",
-        "storage"
+        "storage",
+        "declarativeContent"
     ],
     "icons": {
         "16": "assets/icons/icon16.png",
         "48": "assets/icons/icon48.png",
         "128": "assets/icons/icon128.png"
     },
-    "browser_action": {
-        "default_popup": "src/popup/index.html"
+    "page_action": {
+        "default_icon": {
+            "16": "assets/icons/icon16.png"
+        },
+        "default_title": "CartUtil",
+        "default_popup": "src/popup/popup.html"
     },
     "content_scripts": [
         {
             "matches": [
                 "http://akizukidenshi.com/*",
+                "https://akizukidenshi.com/*",
                 "https://www.switch-science.com/*"
             ],
             "js": [
-                "src/cscript/script.js"
+                "src/cscript/cscript.js"
             ],
-            "css": [
+            "css":[
                 "src/cscript/style.css"
             ]
         }
     ],
     "options_ui": {
-        "page": "src/options/index.html",
-        "chrome_style": true
+        "page": "src/options/options.html",
+        "open_in_tab": true
+    },
+    "background": {
+        "scripts": [
+            "src/background/background.js"
+        ],
+        "persistent": true
     }
 }
