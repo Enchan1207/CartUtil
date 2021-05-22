@@ -1,6 +1,8 @@
 //
 // popup script
 //
+import MessageSender from "../lib/MessageSender.js"
+import Message from "../lib/Message.js"
 
 document.addEventListener('DOMContentLoaded', async (event) => {
 

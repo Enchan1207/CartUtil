@@ -1,10 +1,12 @@
 //
 // content script
 //
+import MessageReceiver from "../lib/MessageReceiver.js"
 
 (() => {
-    _ = new MessageReceiver((message, sender, sendResponse) => {
+    const receiver = new MessageReceiver();
+    receiver.callback = (message, sender, sendResponse) => {
         console.log(message);
         sendResponse(message);
-    });
-})()
+    };
+})();

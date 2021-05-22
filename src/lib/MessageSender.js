@@ -2,7 +2,7 @@
 // メッセージ送信クラス
 //
 
-class MessageSender {
+export default class MessageSender {
 
     /**
      * `Message`オブジェクトを送信する。
