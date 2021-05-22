@@ -12,11 +12,11 @@
     loadIdentifierElement.id = loadID;
     document.head.appendChild(loadIdentifierElement);
 
-    // scriptタグを生成して追加
+    // 動的import
     const files = [
-        "src/lib/Message.js",
-        "src/lib/MessageSender.js",
-        "src/lib/MessageReceiver.js",
+        // "src/lib/Message.js",
+        // "src/lib/MessageSender.js",
+        // "src/lib/MessageReceiver.js",
         "src/cscript/cscript.js"
     ];
     files.forEach(async (file) => { 

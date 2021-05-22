@@ -1,7 +1,9 @@
 //
 // content script
 //
+import Message from "../lib/Message.js";
 import MessageReceiver from "../lib/MessageReceiver.js"
+import MessageSender from "../lib/MessageSender.js"
 
 (() => {
     const receiver = new MessageReceiver();
@@ -9,4 +11,11 @@ import MessageReceiver from "../lib/MessageReceiver.js"
         console.log(message);
         sendResponse(message);
     };
+
+    const sender = new MessageSender();
+    setInterval(() => {
+        sender.sendMessage(null, new Message("ssci", "174", [], null, null), (response) => {
+            console.log(response);
+        });
+    }, 1000);
 })();

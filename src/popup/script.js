@@ -2,6 +2,7 @@
 // popup script
 //
 import MessageSender from "../lib/MessageSender.js"
+import MessageReceiver from "../lib/MessageReceiver.js"
 import Message from "../lib/Message.js"
 
 document.addEventListener('DOMContentLoaded', async (event) => {
@@ -15,6 +16,12 @@ document.addEventListener('DOMContentLoaded', async (event) => {
             console.log(response);
         });
     }, 1000);
+
+    const receiver = new MessageReceiver();
+    receiver.callback = (message, sender, sendResponse) => {
+        console.log(message);
+        sendResponse(message);
+    };
 
 });
 
