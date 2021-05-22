@@ -14,10 +14,10 @@
 
     // scriptタグを生成して追加
     const files = [
-        "src/cscript/cscript.js",
         "src/lib/Message.js",
         "src/lib/MessageSender.js",
-        "src/lib/MessageReceiver.js"
+        "src/lib/MessageReceiver.js",
+        "src/cscript/cscript.js"
     ];
     files.forEach(async (file) => { 
         await import(chrome.runtime.getURL(file));
