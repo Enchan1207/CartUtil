@@ -1,7 +1,7 @@
 //
 // メッセージ受信クラス
 //
-import Message from "./Message.js"
+import Message from "./Message.js";
 export default class MessageReceiver {
 
     /**

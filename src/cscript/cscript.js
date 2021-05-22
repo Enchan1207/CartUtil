@@ -2,10 +2,10 @@
 // content script
 //
 import Message from "../lib/Message.js";
-import MessageReceiver from "../lib/MessageReceiver.js"
-import MessageSender from "../lib/MessageSender.js"
+import MessageReceiver from "../lib/MessageReceiver.js";
+import MessageSender from "../lib/MessageSender.js";
 
-(() => {
+export function main() {
     const receiver = new MessageReceiver();
     receiver.callback = (message, sender, sendResponse) => {
         console.log(message);
@@ -18,4 +18,4 @@ import MessageSender from "../lib/MessageSender.js"
             console.log(response);
         });
     }, 1000);
-})();
+}

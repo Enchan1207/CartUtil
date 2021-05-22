@@ -4,7 +4,7 @@
 
 (() => {
     // 重複ロード防止
-    const loadID = `${chrome.runtime.id}-script`
+    const loadID = `${chrome.runtime.id}-script`;
     if (document.getElementById(loadID)) {
         return;
     }
@@ -13,13 +13,8 @@
     document.head.appendChild(loadIdentifierElement);
 
     // 動的import
-    const files = [
-        // "src/lib/Message.js",
-        // "src/lib/MessageSender.js",
-        // "src/lib/MessageReceiver.js",
-        "src/cscript/cscript.js"
-    ];
-    files.forEach(async (file) => { 
-        await import(chrome.runtime.getURL(file));
-    });
+    (async () => {
+        const cscript = await import(chrome.runtime.getURL("src/cscript/cscript.js"));
+        cscript.main();
+    })();
 })();

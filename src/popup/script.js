@@ -1,9 +1,9 @@
 //
 // popup script
 //
-import MessageSender from "../lib/MessageSender.js"
-import MessageReceiver from "../lib/MessageReceiver.js"
-import Message from "../lib/Message.js"
+import Message from "../lib/Message.js";
+import MessageReceiver from "../lib/MessageReceiver.js";
+import MessageSender from "../lib/MessageSender.js";
 
 document.addEventListener('DOMContentLoaded', async (event) => {
 
@@ -36,7 +36,7 @@ const getCurrentTab = (query = null) => {
         chrome.tabs.query(q, (tabs) => {
             if (tabs.length == 0) {
                 reject("couldn't specify tab!");
-                return
+                return;
             }
             resolve(tabs[0]);
         });
