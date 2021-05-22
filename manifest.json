@@ -28,24 +28,23 @@
                 "https://www.switch-science.com/*"
             ],
             "js": [
-                "src/lib/MessageSender.js",
-                "src/lib/MessageReceiver.js",
-                "src/lib/Message.js",
-                "src/cscript/cscript.js"
+                "src/cscript/inject.js"
             ],
-            "css":[
+            "css": [
                 "src/cscript/style.css"
             ]
         }
+    ],
+    "web_accessible_resources": [
+        "src/**",
+        "src/lib/**"
     ],
     "options_ui": {
         "page": "src/options/options.html",
         "open_in_tab": true
     },
     "background": {
-        "scripts": [
-            "src/background/background.js"
-        ],
-        "persistent": true
+        "page": "src/background/background.html",
+        "persistent": false
     }
 }

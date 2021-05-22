@@ -2,7 +2,7 @@
 // スクリプト間通信用のメッセージ
 //
 
-class Message {
+export default class Message {
 
     /**
      * @param {string} source - メッセージ発行元

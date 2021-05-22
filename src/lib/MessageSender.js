@@ -1,8 +1,9 @@
 //
 // メッセージ送信クラス
 //
+import Message from "./Message.js";
 
-class MessageSender {
+export default class MessageSender {
 
     /**
      * `Message`オブジェクトを送信する。
@@ -12,6 +13,9 @@ class MessageSender {
      * @param {Object} callback - メッセージのレスポンスを受け取る関数
      */
     sendMessage(destination, message, callback) {
+        if (!(message instanceof Message)) {
+            console.warn(`passed argument ${message} is not instance of Message.`);
+        }
         if (destination === null) {
             chrome.runtime.sendMessage(message, callback);
         } else {

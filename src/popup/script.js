@@ -1,6 +1,9 @@
 //
 // popup script
 //
+import Message from "../lib/Message.js";
+import MessageReceiver from "../lib/MessageReceiver.js";
+import MessageSender from "../lib/MessageSender.js";
 
 document.addEventListener('DOMContentLoaded', async (event) => {
 
@@ -13,6 +16,12 @@ document.addEventListener('DOMContentLoaded', async (event) => {
             console.log(response);
         });
     }, 1000);
+
+    const receiver = new MessageReceiver();
+    receiver.callback = (message, sender, sendResponse) => {
+        console.log(message);
+        sendResponse(message);
+    };
 
 });
 
@@ -27,7 +36,7 @@ const getCurrentTab = (query = null) => {
         chrome.tabs.query(q, (tabs) => {
             if (tabs.length == 0) {
                 reject("couldn't specify tab!");
-                return
+                return;
             }
             resolve(tabs[0]);
         });
