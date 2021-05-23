@@ -52,12 +52,11 @@ export default class WishList {
 
     /**
      * update existing item.
-     * @module updateItem
-     * @param {string} id 
+     * @module updateItem 
      * @param {WishListItem} newItem 
      */
-    updateItem(id, newItem) {
-        this.items = this.items.map((item) => { return (item.id != id) ? item : newItem; });
+    updateItem(newItem) {
+        this.items = this.items.map((item) => { return (item.id != newItem.id) ? item : newItem; });
     }
 }
 
