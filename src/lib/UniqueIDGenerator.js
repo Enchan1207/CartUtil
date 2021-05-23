@@ -11,7 +11,7 @@ export default class UniqueIDGenerator {
      * @param {number|null} strength - 強さ デフォルトで10000
      * @returns 適当に生成したガバID
      */
-    getUniqueID = (strength = null) => {
+    static getUniqueID = (strength = null) => {
         const s = strength ?? 10000;
 
         // DateをUnixtimeに起こしてn倍して、13~14桁のhex文字列を生成
