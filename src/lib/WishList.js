@@ -2,19 +2,20 @@
 //
 // ウィッシュリスト
 //
+import UniqueIDGenerator from "./UniqueIDGenerator.js";
 import WishListItem from "./WishListItem.js";
 
 export default class WishList {
 
     /**
      * @constructor
-     * @param {string} id - ウィッシュリストの識別子
      * @param {string} name - 名前
+     * @param {string|null} id - ウィッシュリストの識別子
      * @param {WishListItem[]} items - ウィッシュリストの項目
      */
-    constructor(id, name, items = []) {
-        /** @type {string} id */
-        this.id = id;
+    constructor(name, id = null, items = []) {
+        /** @type {string} */
+        this.id = id ?? UniqueIDGenerator.getUniqueID();
 
         /** @type {string} name */
         this.name = name;
