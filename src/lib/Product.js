@@ -1,8 +1,9 @@
+// @ts-check
 //
 // 商品基底クラス
 //
 
-class Product {
+export default class Product {
 
     /**
      * @constructor
@@ -11,11 +12,13 @@ class Product {
      * @param {number} price 
      */
     constructor(identifier, name, price) {
-        // idはインスタンスの識別情報
-        // identifierは`P-00000`とか`174 (SKU)`とか 商品の識別情報
-        // this.id = NSUUID()
+        /** @type {string} `P-00000`とか`174 (SKU)`とか 商品の識別情報 */
         this.identifier = identifier;
+
+        /** @type {string} */
         this.name = name;
+        
+        /** @type {number} */
         this.price = price;
     }
 }

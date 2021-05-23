@@ -1,16 +1,25 @@
+// @ts-check
 //
 // ウィッシュリスト項目
 //
+import Product from "./Product.js";
 
-class WishListItem {
+export default class WishListItem {
 
     /**
-     * 
-     * @param {Product|null} product 
+     * @constructor
+     * @param {string} id
+     * @param {Product} product 
      * @param {number} count 
      */
-    constructor(product = null, count = 0){
+    constructor(id, product, count = 0){
+        /** @type {string} */
+        this.id = id;
+
+        /** @type {Product} */
         this.product = product;
+
+        /** @type {number} */
         this.count = count;
     }
 }
