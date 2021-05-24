@@ -1,28 +1,31 @@
 //
 // content script
 //
-import Message from "../lib/Message.js";
-import MessageReceiver from "../lib/MessageReceiver.js";
-import MessageSender from "../lib/MessageSender.js";
-import UniqueIDGenerator from "../lib/UniqueIDGenerator.js";
+
+import AkizukiProductGenerator from "../lib/AkizukiProductGenerator.js";
+import SSciProuctGenerator from "../lib/SSciProuctGenerator.js";
 
 export function main() {
-    const receiver = new MessageReceiver();
-    receiver.callback = (message, sender, sendResponse) => {
-        console.log(message);
-        sendResponse(message);
-    };
+    // ホスト分岐
+    const href = new URL(location.href);
+    switch (href.host) {
+        case "akizukidenshi.com":
+            if (/([MKPBRSICT]-[0-9]+)\/$/.test(href.pathname)) {
+                const generator = new AkizukiProductGenerator();
+                console.log(generator.generateFrom(document));
+            }
+            break;
 
-    // const sender = new MessageSender();
-    // setInterval(() => {
-    //     sender.sendMessage(null, new Message("ssci", "174", [], null, null), (response) => {
-    //         console.log(response);
-    //     });
-    // }, 1000);
-
-    const generator = new UniqueIDGenerator();
-    for (let index = 0; index < 20; index++) {
-        console.log(generator.getUniqueID());
-        
+        case "www.switch-science.com":
+            if (/\/catalog\/([0-9]+)\//.test(href.pathname)) {
+                const generator = new SSciProuctGenerator();
+                console.log(generator.generateFrom(document));
+            }
+            break;
+    
+        default:
+            break;
     }
+    
+
 }
