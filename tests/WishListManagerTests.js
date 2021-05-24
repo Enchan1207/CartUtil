@@ -21,7 +21,7 @@ export default class WishlistManagerTests extends TestCase {
         /** @type {WishList[]} */
         this.dummyItems = Array(this.dummyCount).fill(null).map(() => { return new WishList("new WishList"); });
 
-        // ウィッシュリストマネージャに追加
+        // ほしい物リストマネージャに追加
         this.dummyItems.forEach((item) => { this.manager.addList(item); });
 
     }

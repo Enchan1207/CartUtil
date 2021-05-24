@@ -12,7 +12,7 @@ export default class WishlistTests extends TestCase {
     constructor() {
         super();
 
-        // ウィッシュリストを生成
+        // ほしい物リストを生成
         this.wishList = new WishList("new wishlist");
         console.log(`wishlist: ${this.wishList.id}`);
 
@@ -23,7 +23,7 @@ export default class WishlistTests extends TestCase {
         /** @type {WishListItem[]} */
         this.dummyItems = Array(this.dummyCount).fill(null).map(() => { return new WishListItem(new Product("", "", Math.floor(Math.random() * 1000)), Math.floor(Math.random() * 10)) });
 
-        // ウィッシュリストに追加
+        // ほしい物リストに追加
         this.dummyItems.forEach((item) => { this.wishList.addItem(item); });
     }
 
