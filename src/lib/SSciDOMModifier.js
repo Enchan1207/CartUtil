@@ -44,7 +44,6 @@ export default class SSciDOMModifier extends DOMModifier {
         const buttonWrapperElement = this.document.createElement("div");
         buttonWrapperElement.id = "addwrapper";
         buttonWrapperElement.innerHTML = buttonhtml;
-        buttonWrapperElement.tabIndex = 0;
 
         // buttonにeventlistenerを設定して (ここクソ実装)
         const buttonElement = buttonWrapperElement.querySelector(".addbutton");

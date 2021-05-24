@@ -4,33 +4,53 @@
 
 import AkizukiDOMModifier from "../lib/AkizukiDOMModifier.js";
 import AkizukiProductGenerator from "../lib/AkizukiProductGenerator.js";
+import SSciDOMModifier from "../lib/SSciDOMModifier.js";
 import SSciProuctGenerator from "../lib/SSciProuctGenerator.js";
 
 export function main() {
-    // ホスト分岐
+    // 商品ページか判定
     const href = new URL(location.href);
-    switch (href.host) {
-        case "akizukidenshi.com":
-            if (/([MKPBRSICT]-[0-9]+)\/$/.test(href.pathname)) {
-                const generator = new AkizukiProductGenerator();
-                const product = generator.generateFrom(document);
-                console.log(product);
+    const isProductPage = ((href) => {
+        switch (href.host) {
+            case "akizukidenshi.com":
+                return /([MKPBRSICT]-[0-9]+)\/$/.test(href.pathname);
 
-                const modifier = new AkizukiDOMModifier(document);
-                modifier.modify(product);
+            case "www.switch-science.com":
+                return /\/catalog\/([0-9]+)\//.test(href.pathname);
+            default:
+                return false;
+        }
+    })(href);
+
+    // 商品ページならProductGeneratorとDOMModifierを持ってきて
+    if(isProductPage){
+        const productGenerator = ((host) => {
+            switch (host) {
+                case "akizukidenshi.com":
+                    return new AkizukiProductGenerator();
+                case "www.switch-science.com":
+                    return new SSciProuctGenerator();
+                default:
+                    return null;
             }
-            break;
-
-        case "www.switch-science.com":
-            if (/\/catalog\/([0-9]+)\//.test(href.pathname)) {
-                const generator = new SSciProuctGenerator();
-                console.log(generator.generateFrom(document));
+        })(href.host);
+        const DOMModifier = ((host)=>{
+            switch (host) {
+                case "akizukidenshi.com":
+                    return new AkizukiDOMModifier(document);
+                case "www.switch-science.com":
+                    return new SSciDOMModifier(document);
+                default:
+                    return null;
             }
-            break;
+        })(href.host);
 
-        default:
-            break;
+        if(productGenerator === null || DOMModifier === null){
+            return;
+        }
+        
+        // modify!
+        const product = productGenerator.generateFrom(document);
+        DOMModifier.modify(product);
     }
-
-
 }
