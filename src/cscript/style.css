@@ -84,3 +84,8 @@
 .addlist li:hover {
     background: #ccc;
 }
+
+/* スイッチサイエンスの検索ボックスを縮める */
+#topbar #search_form input#id_keyword {
+    width: 225px !important;
+}

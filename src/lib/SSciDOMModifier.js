@@ -7,6 +7,8 @@ import Product from "./Product.js";
 import WishList from "./WishList.js";
 import WishListItem from "./WishListItem.js";
 import WishListManager from "./WishListManager.js";
+import Message from "./Message.js";
+import MessageSender from "./MessageSender.js";
 
 export default class SSciDOMModifier extends DOMModifier {
 
@@ -26,6 +28,7 @@ export default class SSciDOMModifier extends DOMModifier {
     modify(product) {
         this.injectAddButton();
         this.initWishListInDropDown(product);
+        this.injectWishListViewButton();
     }
 
     /**
@@ -107,4 +110,33 @@ export default class SSciDOMModifier extends DOMModifier {
             wishListDropDownElement.appendChild(listElement);
         });
     }
+
+    /**
+     * 「ほしい物リストを確認」ボタンを追加
+     * @module injectWishListViewButton
+     */
+     injectWishListViewButton() {
+        // ページ上部のヘッダを取得し
+        const headerSelector = "#user";
+        const headerElement = this.document.querySelector(headerSelector);
+
+        // 末尾にボタンを追加
+        const buttonElement = this.document.createElement("a");
+        buttonElement.id = "openoption";
+        buttonElement.href= "javascript:void(0);";
+        const liElement = this.document.createElement("li");
+        liElement.className = "wishlist";
+        liElement.textContent = "ほしい物リスト";
+        buttonElement.appendChild(liElement);
+
+        // イベント設定
+        buttonElement.addEventListener('click', () => {
+            const sender = new MessageSender();
+            const message = new Message("content", "openoption", [], null, null);
+            sender.sendMessage(null, message, () => { });
+        });
+
+        headerElement.appendChild(buttonElement);
+    }
+
 }

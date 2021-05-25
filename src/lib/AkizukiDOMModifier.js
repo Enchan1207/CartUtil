@@ -3,6 +3,8 @@
 // DOM編集 - 秋月
 //
 import DOMModifier from "./DOMModifier.js";
+import Message from "./Message.js";
+import MessageSender from "./MessageSender.js";
 import Product from "./Product.js";
 import WishList from "./WishList.js";
 import WishListItem from "./WishListItem.js";
@@ -26,6 +28,7 @@ export default class AkizukiDOMModifier extends DOMModifier {
     modify(product) {
         this.injectAddButton();
         this.initWishListInDropDown(product);
+        this.injectWishListViewButton();
     }
 
     /**
@@ -106,5 +109,40 @@ export default class AkizukiDOMModifier extends DOMModifier {
             listElement.addEventListener('click', () => { addItemtoList(product, 1, manager.getListByID(id)); });
             wishListDropDownElement.appendChild(listElement);
         });
+    }
+
+    /**
+     * 「ほしい物リストを確認」ボタンを追加
+     * @module injectWishListViewButton
+     */
+    injectWishListViewButton() {
+        // ページ上部のヘッダを取得し
+        const headerSelector = "#header > table > tbody > tr:nth-child(2) > td > form";
+        const headerElement = this.document.querySelector(headerSelector);
+
+        // ヘッダのchildNodesからinputとそうでないものを抽出して
+        const childNodes = Array.from(headerElement.childNodes);
+        const inputElements = childNodes.filter((elem) => { return elem.nodeName == "INPUT" });
+        const otherElements = childNodes.filter((elem) => { return elem.nodeName != "INPUT" });
+
+        // otherElementsにいくつか追加して
+        const viewListhtml = " | <a id=\"openoption\" href=\"javascript:void(0);\">ほしい物リスト</a>　";
+        const dummyElement = this.document.createElement("span");
+        dummyElement.innerHTML = viewListhtml;
+        const viewListElements = dummyElement.childNodes;
+        viewListElements.forEach((elem) => { otherElements.push(elem); });
+
+        //戻す
+        const children = otherElements.concat(inputElements);
+        headerElement.innerHTML = "";
+        children.forEach((elem) => { headerElement.appendChild(elem); });
+
+        // イベント設定
+        this.document.getElementById("openoption").addEventListener('click', () => {
+            const sender = new MessageSender();
+            const message = new Message("content", "openoption", [], null, null);
+            sender.sendMessage(null, message, () => { });
+        });
+
     }
 }
