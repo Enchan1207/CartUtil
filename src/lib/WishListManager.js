@@ -1,6 +1,6 @@
 // @ts-check
 //
-// ウィッシュリスト管理
+// ほしい物リスト管理
 //
 
 import WishList from "./WishList.js";
@@ -30,7 +30,11 @@ export default class WishListManager {
      * @param {WishList} list
      */
     addList(list) {
-        this.wishlists.push(list);
+        if(list instanceof WishList){
+            this.wishlists.push(list);
+        }else{
+            console.warn("passed object is not instance of WishList.");
+        }
     }
 
     /**
@@ -52,6 +56,20 @@ export default class WishListManager {
     }
 
     /**
+     * get existing list specified by id.
+     * @module getListByID
+     * @param {string} id
+     * @returns {WishList|null}
+     */
+    getListByID(id) {
+        const candidates = this.wishlists.filter((wishlist) => { return wishlist.id == id; });
+        if (candidates.length == 0) {
+            return null;
+        }
+        return candidates[0];
+    }
+
+    /**
      * get stored wishlists.
      * @module restore
      * @returns Promise
@@ -64,7 +82,7 @@ export default class WishListManager {
                 reject("you can't restore list at current environment.");
             }
             // @ts-ignore
-            chrome.storage.local.get("wishlists", (lists) => {
+            chrome.storage.local.get("wishlists", (listObject) => {
                 // @ts-ignore
                 if (chrome.runtime.error) {
                     // @ts-ignore
@@ -73,8 +91,8 @@ export default class WishListManager {
                     reject(chrome.runtime.error);
                     return;
                 }
-                this.wishlists = lists;
-                resolve(lists);
+                this.wishlists = listObject.wishlists.map((wishlist) => {return new WishList(wishlist.name, wishlist.id, wishlist.items);});
+                resolve(listObject.wishlists);
             });
         });
     }

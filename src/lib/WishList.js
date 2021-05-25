@@ -1,6 +1,6 @@
 // @ts-check
 //
-// ウィッシュリスト
+// ほしい物リスト
 //
 import UniqueIDGenerator from "./UniqueIDGenerator.js";
 import WishListItem from "./WishListItem.js";
@@ -10,8 +10,8 @@ export default class WishList {
     /**
      * @constructor
      * @param {string} name - 名前
-     * @param {string|null} id - ウィッシュリストの識別子
-     * @param {WishListItem[]} items - ウィッシュリストの項目
+     * @param {string|null} id - ほしい物リストの識別子
+     * @param {WishListItem[]} items - ほしい物リストの項目
      */
     constructor(name, id = null, items = []) {
         /** @type {string} */

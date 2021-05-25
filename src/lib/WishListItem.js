@@ -1,6 +1,6 @@
 // @ts-check
 //
-// ウィッシュリスト項目
+// ほしい物リスト項目
 //
 import Product from "./Product.js";
 import UniqueIDGenerator from "./UniqueIDGenerator.js";
