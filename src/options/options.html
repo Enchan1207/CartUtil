@@ -6,14 +6,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <script src="script.js"></script>
+    <link rel="stylesheet" href="./style.css">
+    <script src="script.js" type="module"></script>
 
-    <title>CartUtil options</title>
+    <title>ほしい物リスト管理</title>
 </head>
 
 <body>
-    <h1>CartUtil options</h1>
-
+    <div id="header">
+        <span class="icon">
+            <img src="/assets/icons/icon.svg">
+        </span>
+        <span class="title">
+            <h1>CartUtil options</h1>
+        </span>
+        <span class="release">
+            <a href="https://github.com/Enchan1207/CartUtil/releases" target="_blank">
+                <img src="https://img.shields.io/github/v/release/Enchan1207/CartUtil">
+            </a>
+        </span>
+    </div>
+    <div id="wrapper">
+        <div class="frame">
+            <h2>ほしい物リスト一覧</h2>
+        </div>
+        <div class="frame">
+            <ul id="lists">
+            </ul>
+        </div>
+    </div>
 </body>
 
 </html>
