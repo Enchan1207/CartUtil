@@ -87,7 +87,7 @@ body {
     list-style: none;
 }
 
-#lists > a{
+#lists>a {
     text-decoration: none;
     color: #222;
 }
@@ -99,6 +99,7 @@ body {
 
 #lists .list {
     display: flex;
+    align-items: center;
     border-left-width: 3px;
     border-left-style: solid;
     padding: 5px;
@@ -114,6 +115,10 @@ body {
     background: #dbdbdb;
 }
 
+.list .info {
+    width: calc(100% - 70px - 40px);
+}
+
 .list .thumb {
     width: 70px;
     height: 70px;
@@ -126,20 +131,46 @@ body {
     object-fit: contain;
 }
 
-#lists .list.aki {
+.list .contextmenu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    transition: .1s all ease-in-out;
+    opacity: 0;
+    user-select: none;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.list .contextmenu:hover {
+    background: #c0c0c0;
+}
+
+.list:hover>.contextmenu {
+    opacity: 1 !important;
+    user-select: all;
+}
+
+.list.aki {
     border-left-color: #ffb8ea;
 }
 
-#lists .list.ssci {
+.list.ssci {
     border-left-color: #000;
 }
 
-#lists .list h2 {
+.list .info {
+    height: 70px;
+}
+
+.list .info h2 {
     margin: 0;
     font-weight: normal;
 }
 
-#lists .list .count {
+.list .info .count {
     font-size: 0.95em;
     color: #666;
 }
