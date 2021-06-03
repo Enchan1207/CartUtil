@@ -1,0 +1,176 @@
+/*
+ * オプションページCSS
+ */
+
+body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: #ccc;
+}
+
+#header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: sticky;
+    top: 0;
+    margin: 0;
+    height: 50px;
+    line-height: 50px;
+    border-bottom: 3px #333 solid;
+    color: #ddd;
+    background: #444;
+    user-select: none;
+}
+
+#header span {
+    height: 100%;
+    text-align: center;
+}
+
+#header .icon {
+    width: 4%;
+    min-width: 50px;
+}
+
+#header .icon img {
+    width: 30px;
+    height: 25px;
+    margin: 12.5px 10px;
+    object-fit: contain;
+}
+
+#header .title {
+    width: 85%;
+    text-align: left;
+}
+
+#header .title h1 {
+    margin: 0;
+    padding: 0 10px;
+}
+
+#header .release {
+    width: 10%;
+    min-width: 100px;
+    text-align: center;
+}
+
+#header .release a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+#wrapper {
+    width: 100%;
+    min-height: 80vh;
+}
+
+#wrapper .frame {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background: #eee;
+    overflow: hidden;
+}
+
+#lists {
+    max-width: 1000px;
+    transition: all .7s ease-in-out;
+    padding: 0;
+    list-style: none;
+}
+
+#lists>a {
+    text-decoration: none;
+    color: #222;
+}
+
+#lists.hidden {
+    margin-left: calc(-100% - 10px);
+    opacity: 0;
+}
+
+#lists .list {
+    display: flex;
+    align-items: center;
+    border-left-width: 3px;
+    border-left-style: solid;
+    padding: 5px;
+    margin: 5px;
+    transition: all .1s ease-in-out;
+    user-select: none;
+    cursor: pointer;
+    text-decoration: none;
+    color: #333;
+}
+
+#lists .list:hover {
+    background: #dbdbdb;
+}
+
+.list .info {
+    width: calc(100% - 70px - 40px);
+}
+
+.list .thumb {
+    width: 70px;
+    height: 70px;
+}
+
+.list .thumb img {
+    width: 80%;
+    height: 80%;
+    padding: 10%;
+    object-fit: contain;
+}
+
+.list .contextmenu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    transition: .1s all ease-in-out;
+    opacity: 0;
+    user-select: none;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.list .contextmenu:hover {
+    background: #c0c0c0;
+}
+
+.list:hover>.contextmenu {
+    opacity: 1 !important;
+    user-select: all;
+}
+
+.list.aki {
+    border-left-color: #ffb8ea;
+}
+
+.list.ssci {
+    border-left-color: #000;
+}
+
+.list .info {
+    height: 70px;
+}
+
+.list .info h2 {
+    margin: 0;
+    font-weight: normal;
+}
+
+.list .info .count {
+    font-size: 0.95em;
+    color: #666;
+}
