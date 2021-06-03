@@ -50,7 +50,7 @@ const main = async () => {
                 console.log(`[\x1B[32mSUCCESS\x1B[0m] ${testScriptPath}`);
             })
             .catch((error) => {
-                console.error(`[\x1B[31mFAIRED\x1B[0m] ${testScriptPath} ${error.name}: ${error.message}`);
+                console.error(`[\x1B[31mFAILED\x1B[0m] ${testScriptPath} ${error.name}: ${error.message}`);
             });
 
     });
