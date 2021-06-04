@@ -6,8 +6,13 @@ import AkizukiDOMModifier from "../lib/AkizukiDOMModifier.js";
 import AkizukiProductGenerator from "../lib/AkizukiProductGenerator.js";
 import SSciDOMModifier from "../lib/SSciDOMModifier.js";
 import SSciProuctGenerator from "../lib/SSciProuctGenerator.js";
+import TabTypeDistinctor from "../lib/TabTypeDistinctor.js";
 
 export function main() {
+    // Distinctorに通す
+    const distinctor = new TabTypeDistinctor(new URL(location.href));
+    console.log(`site: ${distinctor.getSiteType()} page: ${distinctor.getPageType()}`);
+
     // 商品ページか判定
     const href = new URL(location.href);
     const isProductPage = ((href) => {

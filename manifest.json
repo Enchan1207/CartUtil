@@ -38,7 +38,8 @@
     "web_accessible_resources": [
         "assets/**",
         "src/**",
-        "src/lib/**"
+        "src/lib/**",
+        "assets/**"
     ],
     "options_ui": {
         "page": "src/options/options.html",
