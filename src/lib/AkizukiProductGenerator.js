@@ -28,7 +28,8 @@ export default class AkizukiProductGenerator extends ProductGenerator {
             const productCode = /http.+([MKPBRSICT]-[0-9]+)/.exec(document.location.href)[1];
 
             // 価格を抽出
-            const productPrice = Number(/￥([0-9]+)/.exec(priceElement.textContent)[1]);
+            const productPriceString = priceElement.textContent.replace(/(￥|,)/ig, "");
+            const productPrice = Number(/([0-9]+)/.exec(productPriceString)[1]);
 
             // 生成
             return new Product(productCode, productName, productPrice);
