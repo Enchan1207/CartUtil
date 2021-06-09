@@ -91,7 +91,7 @@ export default class WishListManager {
                     reject(chrome.runtime.error);
                     return;
                 }
-                this.wishlists = listObject.wishlists.map((wishlist) => {return new WishList(wishlist.name, wishlist.id, wishlist.items);});
+                this.wishlists = listObject.wishlists.map((wishlist) => {return new WishList(wishlist.name, wishlist.id, wishlist.items, wishlist.siteType ?? null);});
                 resolve(listObject.wishlists);
             });
         });

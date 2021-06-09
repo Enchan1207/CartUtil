@@ -4,6 +4,7 @@
 //
 import UniqueIDGenerator from "./UniqueIDGenerator.js";
 import WishListItem from "./WishListItem.js";
+import { SiteType } from "./SiteType.js"; 
 
 export default class WishList {
 
@@ -12,8 +13,9 @@ export default class WishList {
      * @param {string} name - 名前
      * @param {string|null} id - ほしい物リストの識別子
      * @param {WishListItem[]} items - ほしい物リストの項目
+     * @param {string|null} siteType - ほしい物リストが管理するサイトのSiteType
      */
-    constructor(name, id = null, items = []) {
+    constructor(name, id = null, items = [], siteType = null) {
         /** @type {string} */
         this.id = id ?? UniqueIDGenerator.getUniqueID();
 
@@ -22,6 +24,9 @@ export default class WishList {
 
         /** @type {WishListItem[]} items */
         this.items = items;
+
+        /** @type {string} siteType */
+        this.siteType = siteType ?? SiteType.Other;
     }
 
     /**
