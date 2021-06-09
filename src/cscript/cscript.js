@@ -4,6 +4,10 @@
 
 import AkizukiDOMModifier from "../lib/AkizukiDOMModifier.js";
 import AkizukiProductGenerator from "../lib/AkizukiProductGenerator.js";
+import DOMModifier from "../lib/DOMModifier.js";
+import { PageType } from "../lib/PageType.js";
+import ProductGenerator from "../lib/ProductGenerator.js";
+import { SiteType } from "../lib/SiteType.js";
 import SSciDOMModifier from "../lib/SSciDOMModifier.js";
 import SSciProuctGenerator from "../lib/SSciProuctGenerator.js";
 import TabTypeDistinctor from "../lib/TabTypeDistinctor.js";
@@ -11,51 +15,62 @@ import TabTypeDistinctor from "../lib/TabTypeDistinctor.js";
 export function main() {
     // Distinctorに通す
     const distinctor = new TabTypeDistinctor(new URL(location.href));
-    console.log(`site: ${distinctor.getSiteType()} page: ${distinctor.getPageType()}`);
+    const siteType = distinctor.getSiteType();
+    const pageType = distinctor.getPageType();
+    console.log(`site: ${siteType} page: ${pageType}`);
 
-    // 商品ページか判定
-    const href = new URL(location.href);
-    const isProductPage = ((href) => {
-        switch (href.host) {
-            case "akizukidenshi.com":
-                return /([MKPBRSICT]-[0-9]+)\/$/.test(href.pathname);
+    // manifestと言ってることちげーぞ!
+    if (siteType == SiteType.Other) {
+        console.error("manifest.jsonとSiteTypeが一致しません。src/lib/SiteType, src/lib/TabTypeDistinctor.jsを確認してください。");
+        return;
+    }
 
-            case "www.switch-science.com":
-                return /\/catalog\/([0-9]+)\//.test(href.pathname);
-            default:
-                return false;
+    // Productインスタンスを生成
+    const product = ((pagetype, sitetype) => {
+        if (pagetype == PageType.Product) {
+            const productGenerator = getProductGenerator(sitetype);
+            return productGenerator.generateFrom(document);
         }
-    })(href);
+        return null;
+    })(pageType, siteType);
+    console.log(product);
 
-    // 商品ページならProductGeneratorとDOMModifierを持ってきて
-    if(isProductPage){
-        const productGenerator = ((host) => {
-            switch (host) {
-                case "akizukidenshi.com":
-                    return new AkizukiProductGenerator();
-                case "www.switch-science.com":
-                    return new SSciProuctGenerator();
-                default:
-                    return null;
-            }
-        })(href.host);
-        const DOMModifier = ((host)=>{
-            switch (host) {
-                case "akizukidenshi.com":
-                    return new AkizukiDOMModifier(document);
-                case "www.switch-science.com":
-                    return new SSciDOMModifier(document);
-                default:
-                    return null;
-            }
-        })(href.host);
+    // Modifierに通す(Productが生成できなくてもModifyできる場合はあるので、Modifierを軽量化すべき)
+    if(product !== null){
+        const modifier = getDOMModifier(siteType);
+        modifier.modify(product);
+    }
+}
 
-        if(productGenerator === null || DOMModifier === null){
-            return;
-        }
-        
-        // modify!
-        const product = productGenerator.generateFrom(document);
-        DOMModifier.modify(product);
+/**
+ * @module getProductGenerator
+ * @param {SiteType} siteType 
+ * @returns {ProductGenerator|null}
+ */
+function getProductGenerator(siteType) {
+    switch (siteType) {
+        case SiteType.AkizukiDenshi:
+            return new AkizukiProductGenerator();
+        case SiteType.SwitchScience:
+            return new SSciProuctGenerator();
+        default:
+            return null;
+    }
+}
+
+/**
+ * @module getDOMModifier
+ * @param {SiteType} siteType 
+ * @param {HTMLDocument|null} doc 
+ * @returns {DOMModifier|null}
+ */
+function getDOMModifier(siteType, doc = document){
+    switch (siteType) {
+        case SiteType.AkizukiDenshi:
+            return new AkizukiDOMModifier(doc);
+        case SiteType.SwitchScience:
+            return new SSciDOMModifier(doc);
+        default:
+            return null;
     }
 }
