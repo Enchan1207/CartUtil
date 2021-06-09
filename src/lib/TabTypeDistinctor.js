@@ -30,26 +30,59 @@ export default class TabTypeDistinctor {
 
         // PageTypeを特定
         this.pageType = ((url, siteType) => {
-            switch (siteType) {
-                // 秋月電子
-                case SiteType.AkizukiDenshi:
-                    if (/\/catalog\/top.aspx/.test(url.pathname)) return PageType.Top;
-                    if (/\/catalog\/g\/g[MKPBRSICT]-\d{5}\//.test(url.pathname)) return PageType.Product
-                    if (/\/catalog\/cart\/cart.aspx/.test(url.pathname)) return PageType.Cart;
-                    if (/\/catalog\/goods\/search.aspx/.test(url.pathname)) return PageType.SearchResult;
-                    return PageType.Other;
+            const pageTypeRules = [
+                {
+                    site_type: SiteType.AkizukiDenshi,
+                    validation_pattern: /^\/catalog\/top.aspx/,
+                    page_type: PageType.Top
+                },
+                {
+                    site_type: SiteType.AkizukiDenshi,
+                    validation_pattern: /^\/catalog\/g\/g[MKPBRSICT]-\d{5}\//,
+                    page_type: PageType.Product
+                },
+                {
+                    site_type: SiteType.AkizukiDenshi,
+                    validation_pattern: /^\/catalog\/cart\/cart.aspx/,
+                    page_type: PageType.Cart
+                },
+                {
+                    site_type: SiteType.AkizukiDenshi,
+                    validation_pattern: /^\/catalog\/goods\/search.aspx/,
+                    page_type: PageType.SearchResult
+                },
+                {
+                    site_type: SiteType.SwitchScience,
+                    validation_pattern: /^\/$/,
+                    page_type: PageType.Top
+                },
+                {
+                    site_type: SiteType.SwitchScience,
+                    validation_pattern: /^\/catalog\/\d+\//,
+                    page_type: PageType.Product
+                },
+                {
+                    site_type: SiteType.SwitchScience,
+                    validation_pattern: /^\/cart\//,
+                    page_type: PageType.Cart
+                },
+                {
+                    site_type: SiteType.SwitchScience,
+                    validation_pattern: /^\/catalog\/list\//,
+                    page_type: PageType.SearchResult
+                },
+            ];
 
-                // スイッチサイエンス
-                case SiteType.SwitchScience:
-                    if (/^\/$/.test(url.pathname)) return PageType.Top;
-                    if (/^\/catalog\/\d+\//.test(url.pathname)) return PageType.Product
-                    if (/^\/cart\//.test(url.pathname)) return PageType.Cart;
-                    if (/^\/catalog\/list\//.test(url.pathname)) return PageType.SearchResult;
-                    return PageType.Other;
+            const pageTypeCandidates = pageTypeRules.filter((rule) => {
+                const isSiteTypeEqual = siteType == rule.site_type;
+                const isValidPatternEqual = rule.validation_pattern.test(url.pathname);
+                return isSiteTypeEqual && isValidPatternEqual;
+            }).map((rule) => { return rule.page_type });
 
-                default:
-                    return PageType.Other;
+            if (pageTypeCandidates.length == 0) {
+                return PageType.Other;
             }
+            return pageTypeCandidates[0];
         })(href, this.siteType);
     }
 
