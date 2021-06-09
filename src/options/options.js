@@ -9,10 +9,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     await manager.restore();
 
     const cellElements = manager.getLists().map((list) => {
-        const listtype = "aki"; // TODO: WishListクラスにサイトタイプを示すプロパティを埋め込む
+        const listtype = list.siteType;
 
         const baseListElement = document.createElement("li");
         baseListElement.setAttribute("data-listid", list.id);
+        baseListElement.setAttribute("data-listname", list.name);
 
         const anchorElement = document.createElement("a");
         anchorElement.href = `details.html?id=${list.id}`;
@@ -37,24 +38,50 @@ document.addEventListener('DOMContentLoaded', async () => {
         countElement.className = "count";
         countElement.textContent = `${list.items.length}個のアイテム`;
 
-        const contextMenuElement = document.createElement("span");
-        contextMenuElement.className = "contextmenu";
-        contextMenuElement.addEventListener('click', (event) => {
-            console.log(baseListElement.getAttribute("data-listid"));
+        // TODO: ここspanボタン生成関数でも作って汎化したほうがいいんじゃないか
+        // コールバックとclassName渡して
+
+        const deleteButtonElement = document.createElement("span");
+        deleteButtonElement.className = "listhoverbutton delete";
+        deleteButtonElement.addEventListener('click', (event) => {
+            const listID = baseListElement.getAttribute("data-listid");
+            const listName = baseListElement.getAttribute("data-listname");
+            event.preventDefault();
+            event.stopPropagation();
+
+            if (confirm(`「${listName}」 を削除しますか?`)) {
+                console.log(`eliminate: ${listName}`);
+                manager.removeList(listID);
+                manager.flush().then(() => {
+                    location.reload();
+                });
+            }
+        });
+
+        const deleteButtonIconElement = document.createElement("img");
+        deleteButtonIconElement.src = "/assets/trash.svg";
+        deleteButtonElement.appendChild(deleteButtonIconElement);
+
+        const renameButtonElement = document.createElement("span");
+        renameButtonElement.className = "listhoverbutton rename";
+        renameButtonElement.addEventListener('click', (event) => {
+            const listID = baseListElement.getAttribute("data-listid");
+            console.log(`rename: ${listID}`);
             event.preventDefault();
             event.stopPropagation();
         });
 
-        const contextMenuIconElement = document.createElement("img");
-        contextMenuIconElement.src = "/assets/threedots.svg";
-        contextMenuElement.appendChild(contextMenuIconElement);
+        const renameButtonIconElement = document.createElement("img");
+        renameButtonIconElement.src = "/assets/pencil.svg";
+        renameButtonElement.appendChild(renameButtonIconElement);
 
         infoElement.appendChild(nameElement);
         infoElement.appendChild(countElement);
         thumbnailElement.appendChild(iconElement);
         anchorElement.appendChild(thumbnailElement);
         anchorElement.appendChild(infoElement);
-        anchorElement.appendChild(contextMenuElement);
+        anchorElement.appendChild(renameButtonElement);
+        anchorElement.appendChild(deleteButtonElement);
 
         baseListElement.appendChild(anchorElement);
 

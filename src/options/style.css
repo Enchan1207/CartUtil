@@ -22,6 +22,7 @@ body {
     color: #ddd;
     background: #444;
     user-select: none;
+    z-index: 10;
 }
 
 #header span {
@@ -116,7 +117,7 @@ body {
 }
 
 .list .info {
-    width: calc(100% - 70px - 40px);
+    width: calc(100% - 70px - 40px - 40px);
 }
 
 .list .thumb {
@@ -131,7 +132,7 @@ body {
     object-fit: contain;
 }
 
-.list .contextmenu {
+.list .listhoverbutton {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -144,21 +145,29 @@ body {
     border-radius: 50%;
 }
 
-.list .contextmenu:hover {
+.list .listhoverbutton:hover {
     background: #c0c0c0;
 }
 
-.list:hover>.contextmenu {
+.list:hover>.listhoverbutton {
     opacity: 1 !important;
     user-select: all;
 }
 
-.list.aki {
+.listhoverbutton img {
+    user-select: none;
+}
+
+.list.SITE_AKI {
     border-left-color: #ffb8ea;
 }
 
-.list.ssci {
+.list.SITE_SSCI {
     border-left-color: #000;
+}
+
+.list.SITE_OTHER {
+    border-left-color: #777;
 }
 
 .list .info {
