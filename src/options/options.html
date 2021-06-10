@@ -21,7 +21,7 @@
             <h1>CartUtil options</h1>
         </span>
         <span class="release">
-            <a href="https://github.com/Enchan1207/CartUtil/releases" target="_blank">
+            <a href="https://github.com/Enchan1207/CartUtil/releases" target="_blank", tabindex="-1">
                 <img src="https://img.shields.io/github/v/release/Enchan1207/CartUtil">
             </a>
         </span>
@@ -33,6 +33,20 @@
         <div class="frame">
             <ul id="lists">
             </ul>
+        </div>
+    </div>
+    <div id="overlay" class="hide">
+        <div class="overlay_frame">
+            <div class="overlay_header overlay_cell">
+                <h2>ほしい物リストを編集:</h2>
+            </div>
+            <div class="overlay_inputs overlay_cell">
+                <label for="wishlist_name">名前 <input type="text" name="wishlist_name" tabindex="-1"></label>
+            </div>
+            <div class="overlay_control overlay_cell">
+                <button id="confirm" tabindex="-1">保存</button>
+                <button id="cancel" tabindex="-1">キャンセル</button>
+            </div>
         </div>
     </div>
 </body>

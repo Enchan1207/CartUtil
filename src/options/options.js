@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const anchorElement = document.createElement("a");
         anchorElement.href = `details.html?id=${list.id}`;
         anchorElement.className = `list ${listtype}`;
+        anchorElement.tabIndex = -1;
         const thumbnailElement = document.createElement("span");
         thumbnailElement.className = "thumb";
         const iconElement = document.createElement("img");
@@ -48,6 +49,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const listName = baseListElement.getAttribute("data-listname");
             event.preventDefault();
             event.stopPropagation();
+            document.activeElement.blur();
 
             if (confirm(`「${listName}」 を削除しますか?`)) {
                 console.log(`eliminate: ${listName}`);
@@ -65,10 +67,19 @@ document.addEventListener('DOMContentLoaded', async () => {
         const renameButtonElement = document.createElement("span");
         renameButtonElement.className = "listhoverbutton rename";
         renameButtonElement.addEventListener('click', (event) => {
-            const listID = baseListElement.getAttribute("data-listid");
-            console.log(`rename: ${listID}`);
             event.preventDefault();
             event.stopPropagation();
+            document.activeElement.blur();
+
+            const listID = baseListElement.getAttribute("data-listid");
+
+            // TODO: Overlayクラス作ってそっちで管理したい
+            // WishListオブジェクトごと渡して管理できるとなおよし
+            const overlay = document.getElementById("overlay");
+            overlay.className = "show";
+            overlay.setAttribute("data-listID", listID);
+
+            console.log(`rename: ${listID}`);
         });
 
         const renameButtonIconElement = document.createElement("img");
@@ -92,4 +103,34 @@ document.addEventListener('DOMContentLoaded', async () => {
     cellElements.forEach((element) => {
         wishlistElement.appendChild(element);
     });
+
+    // オーバーレイ初期化
+    const overlayElement = document.getElementById("overlay");
+    overlayElement.className = "hide";
+
+    overlayElement.addEventListener('click', (event)=>{
+        overlayElement.className = "hide";        
+    });
+
+    const overlayControlElement = document.querySelector(".overlay_frame");
+    overlayControlElement.addEventListener('click', (event) => {
+        event.stopPropagation();
+    });
+
+    const overlayConfirmButtonElement = document.getElementById("confirm");
+    overlayConfirmButtonElement.addEventListener('click', (event) => {
+        event.stopPropagation();
+        event.preventDefault();
+        console.log(overlayElement.getAttribute("data-listid"));
+        overlayElement.className = "hide";
+    });
+
+    const overlayCancelButtonElement = document.getElementById("cancel");
+    overlayCancelButtonElement.addEventListener('click', (event) => {
+        event.stopPropagation();
+        event.preventDefault();
+        overlayElement.className = "hide";
+    });
+
+
 });
